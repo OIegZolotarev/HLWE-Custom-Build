@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <ProjectGuid>{B946D898-E02C-4981-A0AF-1FCEEBB3AAF3}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\build\$(ProjectName)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\build\$(ProjectName)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CustomBuildAfterTargets>Link</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>.;..\hud_icons;rendersystem;..\utils\vgui\include;..\engine;..\common;..\pm_shared;..\dlls;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;CLIENT_DLL;CLIENT_WEAPONS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\cl_dll.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug\cl_dll.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\cl_dll.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>..\bin\cl_dll.dll</OutputFile>
+      <ImportLibrary>.\Debug\client.lib</ImportLibrary>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;../utils/vgui/lib/win32_vc6/vgui.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CustomBuildStep>
+      <Command>echo y | copy "$(SolutionDir)..\..\bin\cl_dll.dll" "D:\Games\Steam\steamapps\common\Half-Life\hl15we\cl_dlls"
+cd /d "D:\Games\Steam\steamapps\common\Half-Life\"
+hl.exe -game hl15we
+</Command>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>echo y | copy "$(Projectdir)..\bin\cl_dll.dll" "D:\Games\Steam\steamapps\common\Half-Life\hl15we\cl_dlls\client.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>.;rendersystem;..\hud_icons;..\utils\vgui\include;..\engine;..\common;..\pm_shared;..\dlls;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;CLIENT_DLL;CLIENT_WEAPONS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\cl_dll\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Release\cl_dll\cl_dll.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\cl_dll\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\cl_dll\</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\cl_dll.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\cl_dll.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>..\bin\cl_dll.dll</OutputFile>
+      <ImportLibrary>.\Release\client.lib</ImportLibrary>
+      <AdditionalDependencies>winmm.lib;../utils/vgui/lib/win32_vc6/vgui.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>echo y | copy "$(Projectdir)..\bin\cl_dll.dll" "D:\Games\Steam\steamapps\common\Half-Life\hl15we\cl_dlls\client.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\interface.cpp" />
+    <ClCompile Include="..\game_shared\vgui_checkbutton2.cpp" />
+    <ClCompile Include="..\game_shared\vgui_grid.cpp" />
+    <ClCompile Include="..\game_shared\vgui_helpers.cpp" />
+    <ClCompile Include="..\game_shared\vgui_listbox.cpp" />
+    <ClCompile Include="..\game_shared\vgui_loadtga.cpp" />
+    <ClCompile Include="..\game_shared\vgui_scrollbar2.cpp" />
+    <ClCompile Include="..\game_shared\vgui_slider2.cpp" />
+    <ClCompile Include="..\game_shared\voice_banmgr.cpp" />
+    <ClCompile Include="..\game_shared\voice_status.cpp" />
+    <ClCompile Include="..\pm_shared\pm_debug.c" />
+    <ClCompile Include="..\pm_shared\pm_math.c" />
+    <ClCompile Include="..\pm_shared\pm_shared.c" />
+    <ClCompile Include="ammo.cpp" />
+    <ClCompile Include="ammohistory.cpp" />
+    <ClCompile Include="ammo_secondary.cpp" />
+    <ClCompile Include="buymenu.cpp" />
+    <ClCompile Include="cdll_int.cpp" />
+    <ClCompile Include="classmenu.cpp" />
+    <ClCompile Include="death.cpp" />
+    <ClCompile Include="demo.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="ev_common.cpp" />
+    <ClCompile Include="GameStudioModelRenderer.cpp" />
+    <ClCompile Include="game_fx.cpp" />
+    <ClCompile Include="health.cpp" />
+    <ClCompile Include="hud.cpp" />
+    <ClCompile Include="hud_icons\hud_antigrav_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_battery.cpp" />
+    <ClCompile Include="hud_icons\hud_buyzone.cpp" />
+    <ClCompile Include="hud_icons\hud_cloak_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_firemode.cpp" />
+    <ClCompile Include="hud_icons\hud_flashlight.cpp" />
+    <ClCompile Include="hud_icons\hud_harmor_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_kevlar_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_longjump_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_money_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_PHEV_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_PHK_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_pshield_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_pt_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_scope.cpp" />
+    <ClCompile Include="hud_icons\hud_Timer_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_train.cpp" />
+    <ClCompile Include="hud_icons\hud_turretI_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_turretM_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_turretS_icon.cpp" />
+    <ClCompile Include="hud_icons\hud_warhead.cpp" />
+    <ClCompile Include="hud_msg.cpp" />
+    <ClCompile Include="hud_redraw.cpp" />
+    <ClCompile Include="hud_servers.cpp" />
+    <ClCompile Include="hud_spectator.cpp" />
+    <ClCompile Include="hud_update.cpp" />
+    <ClCompile Include="input.cpp" />
+    <ClCompile Include="inputw32.cpp" />
+    <ClCompile Include="in_camera.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="message.cpp" />
+    <ClCompile Include="msgmgr.cpp" />
+    <ClCompile Include="overview.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="parsemsg.cpp" />
+    <ClCompile Include="rendersystem\Particle.cpp" />
+    <ClCompile Include="rendersystem\ParticleSystem.cpp" />
+    <ClCompile Include="rendersystem\PSBeam.cpp" />
+    <ClCompile Include="rendersystem\PSBlastCone.cpp" />
+    <ClCompile Include="rendersystem\PSBlood.cpp" />
+    <ClCompile Include="rendersystem\PSBubbles.cpp" />
+    <ClCompile Include="rendersystem\PSBubbleTrail.cpp" />
+    <ClCompile Include="rendersystem\PSDrips.cpp" />
+    <ClCompile Include="rendersystem\PSFlatTrail.cpp" />
+    <ClCompile Include="rendersystem\PSGravityPart.cpp" />
+    <ClCompile Include="rendersystem\PSSparks.cpp" />
+    <ClCompile Include="rendersystem\PSSparkShower.cpp" />
+    <ClCompile Include="rendersystem\PSSpawnEffect.cpp" />
+    <ClCompile Include="rendersystem\PSStreaks.cpp" />
+    <ClCompile Include="rendersystem\PSTrail.cpp" />
+    <ClCompile Include="rendersystem\PSWallGibs.cpp" />
+    <ClCompile Include="rendersystem\rain.cpp" />
+    <ClCompile Include="rendersystem\RenderManager.cpp" />
+    <ClCompile Include="rendersystem\RenderSystem.cpp" />
+    <ClCompile Include="rendersystem\RotatingSystem.cpp" />
+    <ClCompile Include="rendersystem\RSBeam.cpp" />
+    <ClCompile Include="rendersystem\RSBeamStar.cpp" />
+    <ClCompile Include="rendersystem\RSCylinder.cpp" />
+    <ClCompile Include="rendersystem\RSDisk.cpp" />
+    <ClCompile Include="rendersystem\RSLight.cpp" />
+    <ClCompile Include="rendersystem\RSSprite.cpp" />
+    <ClCompile Include="rendersystem\RSTeleparts.cpp" />
+    <ClCompile Include="r_particle.cpp" />
+    <ClCompile Include="saytext.cpp" />
+    <ClCompile Include="statusbar.cpp" />
+    <ClCompile Include="StudioModelRenderer.cpp" />
+    <ClCompile Include="studio_util.cpp" />
+    <ClCompile Include="text_message.cpp" />
+    <ClCompile Include="tri.cpp" />
+    <ClCompile Include="util.cpp" />
+    <ClCompile Include="vgui_ClassMenu.cpp" />
+    <ClCompile Include="vgui_ConsolePanel.cpp" />
+    <ClCompile Include="vgui_ControlConfigPanel.cpp" />
+    <ClCompile Include="vgui_CustomObjects.cpp" />
+    <ClCompile Include="vgui_int.cpp" />
+    <ClCompile Include="vgui_MOTDWindow.cpp" />
+    <ClCompile Include="vgui_SchemeManager.cpp" />
+    <ClCompile Include="vgui_ScorePanel.cpp" />
+    <ClCompile Include="vgui_ServerBrowser.cpp" />
+    <ClCompile Include="vgui_SpectatorPanel.cpp" />
+    <ClCompile Include="vgui_TeamFortressViewport.cpp" />
+    <ClCompile Include="vgui_teammenu.cpp" />
+    <ClCompile Include="view.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\cdll_dll.h" />
+    <ClInclude Include="..\common\itrackeruser.h" />
+    <ClInclude Include="..\game_shared\voice_banmgr.h" />
+    <ClInclude Include="..\game_shared\voice_status.h" />
+    <ClInclude Include="..\game_shared\voice_vgui_tweakdlg.h" />
+    <ClInclude Include="..\pm_shared\pm_debug.h" />
+    <ClInclude Include="..\pm_shared\pm_defs.h" />
+    <ClInclude Include="..\pm_shared\pm_info.h" />
+    <ClInclude Include="..\pm_shared\pm_materials.h" />
+    <ClInclude Include="..\pm_shared\pm_movevars.h" />
+    <ClInclude Include="..\pm_shared\pm_shared.h" />
+    <ClInclude Include="ammo.h" />
+    <ClInclude Include="ammohistory.h" />
+    <ClInclude Include="buymenu.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="com_weapons.h" />
+    <ClInclude Include="demo.h" />
+    <ClInclude Include="GameStudioModelRenderer.h" />
+    <ClInclude Include="game_fx.h" />
+    <ClInclude Include="health.h" />
+    <ClInclude Include="hud.h" />
+    <ClInclude Include="hud_iface.h" />
+    <ClInclude Include="hud_servers.h" />
+    <ClInclude Include="hud_servers_priv.h" />
+    <ClInclude Include="hud_spectator.h" />
+    <ClInclude Include="in_defs.h" />
+    <ClInclude Include="kbutton.h" />
+    <ClInclude Include="overview.h" />
+    <ClInclude Include="parsemsg.h" />
+    <ClInclude Include="rendersystem\Particle.h" />
+    <ClInclude Include="rendersystem\ParticleSystem.h" />
+    <ClInclude Include="rendersystem\PSBeam.h" />
+    <ClInclude Include="rendersystem\PSBlastCone.h" />
+    <ClInclude Include="rendersystem\PSBlood.h" />
+    <ClInclude Include="rendersystem\PSBubbles.h" />
+    <ClInclude Include="rendersystem\PSBubbleTrail.h" />
+    <ClInclude Include="rendersystem\PSDrips.h" />
+    <ClInclude Include="rendersystem\PSFlatTrail.h" />
+    <ClInclude Include="rendersystem\PSGravityPart.h" />
+    <ClInclude Include="rendersystem\PSSparks.h" />
+    <ClInclude Include="rendersystem\PSSparkShower.h" />
+    <ClInclude Include="rendersystem\PSSpawnEffect.h" />
+    <ClInclude Include="rendersystem\PSStreaks.h" />
+    <ClInclude Include="rendersystem\PSTrail.h" />
+    <ClInclude Include="rendersystem\PSWallGibs.h" />
+    <ClInclude Include="rendersystem\rain.h" />
+    <ClInclude Include="rendersystem\RenderManager.h" />
+    <ClInclude Include="rendersystem\RenderSystem.h" />
+    <ClInclude Include="rendersystem\RotatingSystem.h" />
+    <ClInclude Include="rendersystem\RSBeam.h" />
+    <ClInclude Include="rendersystem\RSBeamStar.h" />
+    <ClInclude Include="rendersystem\RSCylinder.h" />
+    <ClInclude Include="rendersystem\RSDisk.h" />
+    <ClInclude Include="rendersystem\RSLight.h" />
+    <ClInclude Include="rendersystem\RSSprite.h" />
+    <ClInclude Include="rendersystem\RSTeleparts.h" />
+    <ClInclude Include="r_particle.h" />
+    <ClInclude Include="StudioModelRenderer.h" />
+    <ClInclude Include="studio_util.h" />
+    <ClInclude Include="util.h" />
+    <ClInclude Include="util_vector.h" />
+    <ClInclude Include="vgui_ConsolePanel.h" />
+    <ClInclude Include="vgui_ControlConfigPanel.h" />
+    <ClInclude Include="vgui_int.h" />
+    <ClInclude Include="vgui_SchemeManager.h" />
+    <ClInclude Include="vgui_ScorePanel.h" />
+    <ClInclude Include="vgui_ServerBrowser.h" />
+    <ClInclude Include="vgui_SpectatorPanel.h" />
+    <ClInclude Include="vgui_TeamFortressViewport.h" />
+    <ClInclude Include="view.h" />
+    <ClInclude Include="wrect.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

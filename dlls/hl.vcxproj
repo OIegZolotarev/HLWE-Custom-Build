@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profile|Win32">
+      <Configuration>Profile</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <ProjectGuid>{C64CF738-18DB-4046-9B44-1BA3FE35FFBE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin</OutDir>
+    <IntDir>..\build\$(ProjectName)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
+    <OutDir>.\Profilehl\</OutDir>
+    <IntDir>.\Profilehl\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\build\$(ProjectName)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>...;gamerules;..\.;parser;bots;monsters;projectiles;weapons;..\dlls;..\engine;..\common;..\pm_shared;..\game_shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;QUIVER;VOXEL;QUAKE2;VALVE_DLL;CLIENT_WEAPONS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Releasehl\dlls\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Releasehl\dlls\hl.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Releasehl\dlls\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Releasehl\dlls\</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Releasehl\hl.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Releasehl\hl.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\hl.def</ModuleDefinitionFile>
+      <OutputFile>.\Releasehl\hl.dll</OutputFile>
+      <ImportLibrary>.\Releasehl\hl.lib</ImportLibrary>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>..\dlls;..\engine;..\common;..\pm_shared;..\game_shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;QUIVER;VOXEL;QUAKE2;VALVE_DLL;CLIENT_WEAPONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Profilehl\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Profilehl\hl.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Profilehl\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Profilehl\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Profilehl\hl.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Profilehl\hl.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\hl.def</ModuleDefinitionFile>
+      <OutputFile>.\Profilehl\hl.dll</OutputFile>
+      <ImportLibrary>.\Profilehl\hl.lib</ImportLibrary>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\dlls;gamerules;..\.;parser;bots;monsters;projectiles;weapons;..\engine;..\common;..\game_shared;..\pm_shared;..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;QUIVER;VOXEL;QUAKE2;VALVE_DLL;CLIENT_WEAPONS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\debughl\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\debughl\hl.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\debughl\</ObjectFileName>
+      <ProgramDataBaseFileName>.\debughl\</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\debughl\hl.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\debughl\hl.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\hl.def</ModuleDefinitionFile>
+      <OutputFile>.\debughl\hl.dll</OutputFile>
+      <ImportLibrary>.\Debug\hl.lib</ImportLibrary>
+      <AdditionalDependencies>user32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\game_shared\voice_gamemgr.cpp" />
+    <ClCompile Include="..\pm_shared\pm_debug.c" />
+    <ClCompile Include="..\pm_shared\pm_math.c" />
+    <ClCompile Include="..\pm_shared\pm_shared.c" />
+    <ClCompile Include="ammo.cpp" />
+    <ClCompile Include="animating.cpp" />
+    <ClCompile Include="animation.cpp" />
+    <ClCompile Include="bmodels.cpp" />
+    <ClCompile Include="bot\bot.cpp" />
+    <ClCompile Include="bot\bot_combat.cpp" />
+    <ClCompile Include="buttons.cpp" />
+    <ClCompile Include="cbase.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="combat.cpp" />
+    <ClCompile Include="defaultai.cpp" />
+    <ClCompile Include="doors.cpp" />
+    <ClCompile Include="effects.cpp" />
+    <ClCompile Include="explode.cpp" />
+    <ClCompile Include="func_break.cpp" />
+    <ClCompile Include="func_tank.cpp" />
+    <ClCompile Include="func_turret.cpp" />
+    <ClCompile Include="gamerules\ctf_gamerules.cpp" />
+    <ClCompile Include="gamerules\game.cpp" />
+    <ClCompile Include="gamerules\gamerules.cpp" />
+    <ClCompile Include="gamerules\lms_gamerules.cpp" />
+    <ClCompile Include="gamerules\maprules.cpp" />
+    <ClCompile Include="gamerules\multiplay_gamerules.cpp" />
+    <ClCompile Include="gamerules\singleplay_gamerules.cpp" />
+    <ClCompile Include="gamerules\teamplay_gamerules.cpp" />
+    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="h_ai.cpp" />
+    <ClCompile Include="h_cycler.cpp" />
+    <ClCompile Include="h_export.cpp" />
+    <ClCompile Include="items.cpp" />
+    <ClCompile Include="lights.cpp" />
+    <ClCompile Include="monsters\genericmonster.cpp" />
+    <ClCompile Include="monsters\monstermaker.cpp" />
+    <ClCompile Include="monsters\monsters.cpp" />
+    <ClCompile Include="monsters\monsterstate.cpp" />
+    <ClCompile Include="monsters\mon_rat.cpp" />
+    <ClCompile Include="monsters\mon_zombie.cpp" />
+    <ClCompile Include="monsters\schedule.cpp" />
+    <ClCompile Include="monsters\scripted.cpp" />
+    <ClCompile Include="mortar.cpp" />
+    <ClCompile Include="msg_fx.cpp" />
+    <ClCompile Include="nodes.cpp" />
+    <ClCompile Include="nullents.cpp" />
+    <ClCompile Include="observer.cpp" />
+    <ClCompile Include="parser\ss_error.cpp" />
+    <ClCompile Include="parser\ss_kernel.cpp" />
+    <ClCompile Include="parser\ss_keywords.cpp" />
+    <ClCompile Include="parser\ss_operators.cpp" />
+    <ClCompile Include="parser\ss_parser.cpp" />
+    <ClCompile Include="pathcorner.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="projectiles\mon_proj_guts.cpp" />
+    <ClCompile Include="projectiles\proj_30mmgren.cpp" />
+    <ClCompile Include="projectiles\proj_AK74grenade.cpp" />
+    <ClCompile Include="projectiles\proj_biomass.cpp" />
+    <ClCompile Include="projectiles\proj_blackhole.cpp" />
+    <ClCompile Include="projectiles\proj_bolt.cpp" />
+    <ClCompile Include="projectiles\proj_C4.cpp" />
+    <ClCompile Include="projectiles\proj_chronoclip.cpp" />
+    <ClCompile Include="projectiles\proj_clbaby.cpp" />
+    <ClCompile Include="projectiles\proj_clmomma.cpp" />
+    <ClCompile Include="projectiles\proj_dispball.cpp" />
+    <ClCompile Include="projectiles\proj_dumbfire.cpp" />
+    <ClCompile Include="projectiles\proj_enegrycharge.cpp" />
+    <ClCompile Include="projectiles\proj_flakbomb.cpp" />
+    <ClCompile Include="projectiles\proj_flame.cpp" />
+    <ClCompile Include="projectiles\proj_flashbang.cpp" />
+    <ClCompile Include="projectiles\proj_frostball.cpp" />
+    <ClCompile Include="projectiles\proj_fxspawner.cpp" />
+    <ClCompile Include="projectiles\proj_fxspawner2.cpp" />
+    <ClCompile Include="projectiles\proj_gluon.cpp" />
+    <ClCompile Include="projectiles\proj_gluon2.cpp" />
+    <ClCompile Include="projectiles\proj_grenade.cpp" />
+    <ClCompile Include="projectiles\proj_incendiary.cpp" />
+    <ClCompile Include="projectiles\proj_m203gren.cpp" />
+    <ClCompile Include="projectiles\proj_mmissile.cpp" />
+    <ClCompile Include="projectiles\proj_NGgren.cpp" />
+    <ClCompile Include="projectiles\proj_nuke.cpp" />
+    <ClCompile Include="projectiles\proj_pbolt.cpp" />
+    <ClCompile Include="projectiles\proj_plasma.cpp" />
+    <ClCompile Include="projectiles\proj_plasma2.cpp" />
+    <ClCompile Include="projectiles\proj_pulse.cpp" />
+    <ClCompile Include="projectiles\proj_rpg.cpp" />
+    <ClCompile Include="projectiles\proj_satchel.cpp" />
+    <ClCompile Include="projectiles\proj_satellite.cpp" />
+    <ClCompile Include="projectiles\proj_shielddet.cpp" />
+    <ClCompile Include="projectiles\proj_shock.cpp" />
+    <ClCompile Include="projectiles\proj_shrapnel.cpp" />
+    <ClCompile Include="projectiles\proj_sunofgod.cpp" />
+    <ClCompile Include="projectiles\proj_tankproj.cpp" />
+    <ClCompile Include="projectiles\proj_teleenter.cpp" />
+    <ClCompile Include="projectiles\proj_teslagren.cpp" />
+    <ClCompile Include="projectiles\proj_tripmine.cpp" />
+    <ClCompile Include="projectiles\proj_U2Baby.cpp" />
+    <ClCompile Include="projectiles\proj_U2Momma.cpp" />
+    <ClCompile Include="projectiles\proj_whl.cpp" />
+    <ClCompile Include="recharger.cpp" />
+    <ClCompile Include="skill.cpp" />
+    <ClCompile Include="sound.cpp" />
+    <ClCompile Include="soundent.cpp" />
+    <ClCompile Include="spectator.cpp" />
+    <ClCompile Include="subs.cpp" />
+    <ClCompile Include="trains.cpp" />
+    <ClCompile Include="triggers.cpp" />
+    <ClCompile Include="turret.cpp" />
+    <ClCompile Include="util.cpp" />
+    <ClCompile Include="weapons.cpp" />
+    <ClCompile Include="weapons\wpn_30mmsg.cpp" />
+    <ClCompile Include="weapons\wpn_AK74.cpp" />
+    <ClCompile Include="weapons\wpn_akimbogun.cpp" />
+    <ClCompile Include="weapons\wpn_autoshotgun.cpp" />
+    <ClCompile Include="weapons\wpn_awp.cpp" />
+    <ClCompile Include="weapons\wpn_bandsaw.cpp" />
+    <ClCompile Include="weapons\wpn_barett.cpp" />
+    <ClCompile Include="weapons\wpn_BFG.cpp" />
+    <ClCompile Include="weapons\wpn_biorifle.cpp" />
+    <ClCompile Include="weapons\wpn_blaster.cpp" />
+    <ClCompile Include="weapons\wpn_C4detpack.cpp" />
+    <ClCompile Include="weapons\wpn_chronosceptor.cpp" />
+    <ClCompile Include="weapons\wpn_crossbow.cpp" />
+    <ClCompile Include="weapons\wpn_crowbar.cpp" />
+    <ClCompile Include="weapons\wpn_deagle.cpp" />
+    <ClCompile Include="weapons\wpn_devastator.cpp" />
+    <ClCompile Include="weapons\wpn_displacer.cpp" />
+    <ClCompile Include="weapons\wpn_egon.cpp" />
+    <ClCompile Include="weapons\wpn_flakcannon.cpp" />
+    <ClCompile Include="weapons\wpn_flamethrower.cpp" />
+    <ClCompile Include="weapons\wpn_flashbang.cpp" />
+    <ClCompile Include="weapons\wpn_froster.cpp" />
+    <ClCompile Include="weapons\wpn_g11.cpp" />
+    <ClCompile Include="weapons\wpn_gauss.cpp" />
+    <ClCompile Include="weapons\wpn_glock.cpp" />
+    <ClCompile Include="weapons\wpn_glock_akimbo.cpp" />
+    <ClCompile Include="weapons\wpn_gluongun.cpp" />
+    <ClCompile Include="weapons\wpn_handgrenade.cpp" />
+    <ClCompile Include="weapons\wpn_incendiary.cpp" />
+    <ClCompile Include="weapons\wpn_lightsaber.cpp" />
+    <ClCompile Include="weapons\wpn_M16.cpp" />
+    <ClCompile Include="weapons\wpn_m249.cpp" />
+    <ClCompile Include="weapons\wpn_m72.cpp" />
+    <ClCompile Include="weapons\wpn_machinegun.cpp" />
+    <ClCompile Include="weapons\wpn_medkit.cpp" />
+    <ClCompile Include="weapons\wpn_minigun.cpp" />
+    <ClCompile Include="weapons\wpn_mp5.cpp" />
+    <ClCompile Include="weapons\wpn_nailgun.cpp" />
+    <ClCompile Include="weapons\wpn_photongun.cpp" />
+    <ClCompile Include="weapons\wpn_plasmarifle.cpp" />
+    <ClCompile Include="weapons\wpn_pulserifle.cpp" />
+    <ClCompile Include="weapons\wpn_python.cpp" />
+    <ClCompile Include="weapons\wpn_redeemer.cpp" />
+    <ClCompile Include="weapons\wpn_rpg.cpp" />
+    <ClCompile Include="weapons\wpn_satchel.cpp" />
+    <ClCompile Include="weapons\wpn_satellite.cpp" />
+    <ClCompile Include="weapons\wpn_shieldgun.cpp" />
+    <ClCompile Include="weapons\wpn_shotgun.cpp" />
+    <ClCompile Include="weapons\wpn_smartgun.cpp" />
+    <ClCompile Include="weapons\wpn_svd.cpp" />
+    <ClCompile Include="weapons\wpn_taucannon.cpp" />
+    <ClCompile Include="weapons\wpn_teslagun.cpp" />
+    <ClCompile Include="weapons\wpn_torch.cpp" />
+    <ClCompile Include="weapons\wpn_tripmine.cpp" />
+    <ClCompile Include="weapons\wpn_turretkit.cpp" />
+    <ClCompile Include="weapons\wpn_u2.cpp" />
+    <ClCompile Include="weapons\wpn_usp.cpp" />
+    <ClCompile Include="weapons\wpn_uzi.cpp" />
+    <ClCompile Include="weapons\wpn_uzi_akimbo.cpp" />
+    <ClCompile Include="weapons\wpn_WHL.cpp" />
+    <ClCompile Include="world.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\engine\eiface.h" />
+    <ClInclude Include="..\pm_shared\pm_debug.h" />
+    <ClInclude Include="..\pm_shared\pm_defs.h" />
+    <ClInclude Include="..\pm_shared\pm_info.h" />
+    <ClInclude Include="..\pm_shared\pm_materials.h" />
+    <ClInclude Include="..\pm_shared\pm_movevars.h" />
+    <ClInclude Include="..\pm_shared\pm_shared.h" />
+    <ClInclude Include="animation.h" />
+    <ClInclude Include="cbase.h" />
+    <ClInclude Include="cdll_dll.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="decals.h" />
+    <ClInclude Include="defaultai.h" />
+    <ClInclude Include="doors.h" />
+    <ClInclude Include="effects.h" />
+    <ClInclude Include="enginecallback.h" />
+    <ClInclude Include="explode.h" />
+    <ClInclude Include="extdll.h" />
+    <ClInclude Include="func_break.h" />
+    <ClInclude Include="gamerules\game.h" />
+    <ClInclude Include="gamerules\gamerules.h" />
+    <ClInclude Include="gamerules\maprules.h" />
+    <ClInclude Include="gamerules\teamplay_gamerules.h" />
+    <ClInclude Include="items.h" />
+    <ClInclude Include="money.h" />
+    <ClInclude Include="monsters\activity.h" />
+    <ClInclude Include="monsters\activitymap.h" />
+    <ClInclude Include="monsters\basemonster.h" />
+    <ClInclude Include="monsters\monsterevent.h" />
+    <ClInclude Include="monsters\monsters.h" />
+    <ClInclude Include="monsters\schedule.h" />
+    <ClInclude Include="monsters\scripted.h" />
+    <ClInclude Include="monsters\scriptevent.h" />
+    <ClInclude Include="nodes.h" />
+    <ClInclude Include="parser\ss_consttable.h" />
+    <ClInclude Include="parser\ss_error.h" />
+    <ClInclude Include="parser\ss_functions.h" />
+    <ClInclude Include="parser\ss_kernel.h" />
+    <ClInclude Include="parser\ss_keywords.h" />
+    <ClInclude Include="parser\ss_map.h" />
+    <ClInclude Include="parser\ss_mgr.h" />
+    <ClInclude Include="parser\ss_mystack.h" />
+    <ClInclude Include="parser\ss_operators.h" />
+    <ClInclude Include="parser\ss_parser.h" />
+    <ClInclude Include="parser\ss_scope.h" />
+    <ClInclude Include="parser\ss_structures.h" />
+    <ClInclude Include="parser\ss_types.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="projectiles\mon_projectiles.h" />
+    <ClInclude Include="projectiles\projectiles.h" />
+    <ClInclude Include="saverestore.h" />
+    <ClInclude Include="skill.h" />
+    <ClInclude Include="soundent.h" />
+    <ClInclude Include="spectator.h" />
+    <ClInclude Include="trains.h" />
+    <ClInclude Include="util.h" />
+    <ClInclude Include="vector.h" />
+    <ClInclude Include="weapons.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
