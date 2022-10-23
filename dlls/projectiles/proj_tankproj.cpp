@@ -64,7 +64,7 @@ CTankProj *CTankProj::ShootTankProj(entvars_t *pevOwner, Vector vecStart, Vector
 	pTankProj->pev->velocity = vecVelocity;
 	pTankProj->pev->angles = UTIL_VecToAngles (pTankProj->pev->velocity);
 	pTankProj->pev->owner = ENT(pevOwner);
-	pTankProj->SetTouch( ExplodeTouch );
+	pTankProj->SetTouch( &CTankProj::ExplodeTouch );
 	pTankProj->pev->dmg = dmg_tank_cannon.value * (mp_wpn_power.value/100);
 	return pTankProj;
 }

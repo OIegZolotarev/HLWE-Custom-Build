@@ -39,7 +39,7 @@ void CPlasma2::ExplodeTouch( CBaseEntity *pOther )
 	pev->effects |= EF_NODRAW;
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
-	SetThink( Irradiate );
+	SetThink( &CPlasma2::Irradiate );
 	pev->nextthink = gpGlobals->time + 0.3;
 }
 
@@ -79,8 +79,8 @@ CPlasma2 *CPlasma2::ShootPlasma2( entvars_t *pevOwner, Vector vecStart, Vector v
 	pPlasma2->pev->velocity = vecVelocity;
 	pPlasma2->pev->angles = UTIL_VecToAngles (pPlasma2->pev->velocity);
 	pPlasma2->pev->owner = ENT(pevOwner);
-	pPlasma2->SetTouch( ExplodeTouch );
-	pPlasma2->SetThink ( Fly );
+	pPlasma2->SetTouch( &CPlasma2::ExplodeTouch );
+	pPlasma2->SetThink ( &CPlasma2::Fly );
 	pPlasma2->pev->nextthink = 0.001;
 	pPlasma2->pev->dmg = dmg_plasma_secondary.value * (mp_wpn_power.value/100);
 	FX_Trail(pPlasma2->pev->origin, pPlasma2->entindex(), PROJ_PLASMA);

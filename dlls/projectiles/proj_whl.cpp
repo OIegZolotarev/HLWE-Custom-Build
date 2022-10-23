@@ -34,7 +34,7 @@ void CWhlProjectile::Explode( TraceResult *pTrace, int bitsDamageType )
 	pev->effects |= EF_NODRAW;
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
-	SetThink(ShootShards);
+	SetThink(&CWhlProjectile::ShootShards);
 	pev->nextthink = gpGlobals->time + 0.3;
 }
 
@@ -108,9 +108,9 @@ CWhlProjectile *CWhlProjectile::ShootWhlProjectile( entvars_t *pevOwner, Vector 
 	pWhlProjectile->pev->velocity = vecVelocity;
 	pWhlProjectile->pev->angles = UTIL_VecToAngles (pWhlProjectile->pev->velocity);
 	pWhlProjectile->pev->owner = ENT(pevOwner);
-	pWhlProjectile->SetTouch( ExplodeTouch );
+	pWhlProjectile->SetTouch( &CWhlProjectile::ExplodeTouch );
 	pWhlProjectile->pev->dmg = dmg_whl.value * (mp_wpn_power.value/100);
-	pWhlProjectile->SetThink ( Ignite );
+	pWhlProjectile->SetThink ( &CWhlProjectile::Ignite );
 	pWhlProjectile->pev->nextthink = 0.1;
 	FX_Trail(pWhlProjectile->pev->origin, pWhlProjectile->entindex(), PROJ_WARHEAD );
 

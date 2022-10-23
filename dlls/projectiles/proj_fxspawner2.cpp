@@ -24,7 +24,7 @@ void CFXSpawner2:: Spawn( void )
 	pev->body = 1;
 
 	FX_Trail(pev->origin, entindex(), EFFECT_FREEZE);
-	SetThink ( FollowThink );
+	SetThink ( &CFXSpawner2::FollowThink );
 	pev->nextthink = gpGlobals->time;
 }
 

@@ -39,13 +39,13 @@ void CClBaby:: Spawn( void )
 
 	// Safety removal
 	pev->nextthink = gpGlobals->time + 4.0;
-	SetThink( RemoveMe );
+	SetThink( &CClBaby::RemoveMe );
 }
 
 void CClBaby::RemoveMe( void )
 {
 	pev->owner = NULL;
-	SetThink (SUB_Remove);
+	SetThink (&CBaseEntity::SUB_Remove);
 }
 
 CClBaby *CClBaby::ShootClBaby( entvars_t *pevOwner, Vector vecStart)
@@ -58,7 +58,7 @@ CClBaby *CClBaby::ShootClBaby( entvars_t *pevOwner, Vector vecStart)
 	pClBaby->pev->velocity = gpGlobals->v_up * RANDOM_FLOAT(150,500) + gpGlobals->v_right * RANDOM_FLOAT(-350,350) + gpGlobals->v_forward * RANDOM_FLOAT(-350,350);
 	pClBaby->pev->angles = UTIL_VecToAngles (pClBaby->pev->velocity);
 	pClBaby->pev->owner = ENT(pevOwner);
-	pClBaby->SetTouch( ExplodeTouch );
+	pClBaby->SetTouch( &CClBaby::ExplodeTouch );
 	pClBaby->pev->dmg = dmg_cluster_baby.value * (mp_wpn_power.value/100);
 	pClBaby->pev->body = 11;
 	pClBaby->pev->scale = 2;

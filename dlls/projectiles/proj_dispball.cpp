@@ -63,10 +63,10 @@ CDispball *CDispball::ShootDispball(entvars_t *pevOwner, Vector vecStart, Vector
 	pDispball->pev->velocity = vecVelocity;
 	pDispball->pev->angles = UTIL_VecToAngles (pDispball->pev->velocity);
 	pDispball->pev->owner = ENT(pevOwner);
-	pDispball->SetTouch( ExplodeTouch );
+	pDispball->SetTouch( &CDispball::ExplodeTouch );
 	pDispball->pev->dmg = (dmg_displacer.value*flWastedAmmo) * mp_wpn_power.value/100;
 	FX_Trail(pDispball->pev->origin, pDispball->entindex(), PROJ_DISPLACER);
-	pDispball->SetThink ( Fly );
+	pDispball->SetThink ( &CDispball::Fly );
 	pDispball->pev->nextthink = 0.001;
 	return pDispball;
 }

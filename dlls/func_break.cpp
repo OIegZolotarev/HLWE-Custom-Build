@@ -88,7 +88,7 @@ void CBreakable::Spawn( void )
 
 	SET_MODEL(ENT(pev), STRING(pev->model) );//set size and link into world.
 
-	SetTouch( BreakTouch );
+	SetTouch( &CBreakable::BreakTouch );
 	if ( FBitSet( pev->spawnflags, SF_BREAK_TRIGGER_ONLY ) )		// Only break on trigger
 		SetTouch( NULL );
 
@@ -120,7 +120,7 @@ void CBreakable::RealReSpawn( void )
 
 	SET_MODEL(ENT(pev), STRING(pev->model) );//set size and link into world.
 
-	SetTouch( BreakTouch );
+	SetTouch( &CBreakable::BreakTouch );
 	if ( FBitSet( pev->spawnflags, SF_BREAK_TRIGGER_ONLY ) )		// Only break on trigger
 		SetTouch( NULL );
 
@@ -392,7 +392,7 @@ void CBreakable::BreakTouch( CBaseEntity *pOther )
 	if (flDamage >= 1)
 		DamageSound();
 
-		SetThink ( Die );
+		SetThink ( &CBreakable::Die );
 		SetTouch( NULL );
 		
 		if ( m_flDelay == 0 )
@@ -605,7 +605,7 @@ void CBreakable::Die( void )
 		UTIL_Remove(this);
 	else
 	{
-		SetThink ( RespawnThink );
+		SetThink ( &CBreakable::RespawnThink );
 		pev->nextthink = gpGlobals->time + BREAKABLE_RESPAWN_TIME;
 	}
 }
@@ -725,7 +725,7 @@ void CPushable :: RealReSpawn( void )
 	pev->effects	= 0;
 	pev->solid	= SOLID_BBOX;
 
-	SetTouch( BreakTouch );
+	SetTouch( &CBreakable::BreakTouch );
 	if ( FBitSet( pev->spawnflags, SF_BREAK_TRIGGER_ONLY ) )		// Only break on trigger
 		SetTouch( NULL );
 
@@ -867,7 +867,7 @@ void CPushable::Die( void )
 		UTIL_Remove(this);
 	else
 	{
-		SetThink ( RespawnThink );
+		SetThink ( &CBreakable::RespawnThink );
 		pev->nextthink = gpGlobals->time + BREAKABLE_RESPAWN_TIME;
 	}
 }

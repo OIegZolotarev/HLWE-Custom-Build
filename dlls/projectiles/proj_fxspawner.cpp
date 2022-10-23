@@ -21,7 +21,7 @@ void CFXSpawner:: Spawn( void )
 	pev->health = 200;
 
 	FX_Trail(pev->origin, entindex(), EFFECT_BURN);
-	SetThink ( FollowThink );
+	SetThink ( &CFXSpawner::FollowThink );
 	pev->nextthink = gpGlobals->time;
 }
 

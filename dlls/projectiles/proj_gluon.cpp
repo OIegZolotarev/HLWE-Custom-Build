@@ -68,9 +68,9 @@ CGluon *CGluon::ShootGluon( entvars_t *pevOwner, Vector vecStart, Vector vecVelo
 	pGluon->pev->velocity = vecVelocity;
 	pGluon->pev->angles = UTIL_VecToAngles (pGluon->pev->velocity);
 	pGluon->pev->owner = ENT(pevOwner);
-	pGluon->SetThink ( Fly );
+	pGluon->SetThink ( &CGluon::Fly );
 	pGluon->pev->nextthink = 0.001;
-	pGluon->SetTouch( ExplodeTouch );
+	pGluon->SetTouch( &CGluon::ExplodeTouch );
 	pGluon->pev->dmg = (dmg_gluon.value*2) * (mp_wpn_power.value/100);
 	FX_Trail(pGluon->pev->origin, pGluon->entindex(), PROJ_GLUON);
 	return pGluon;

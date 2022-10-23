@@ -17,7 +17,7 @@ void CItem::Spawn()
 
 	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 16));
 	
-	SetTouch(ItemTouch);
+	SetTouch(&CItem::ItemTouch);
 
 	if (DROP_TO_FLOOR(ENT(pev)) == 0)
 	{
@@ -37,7 +37,7 @@ void CItem::Materialize()
 {
 	// Become visible and touchable
 	pev->effects &= ~EF_NODRAW;
-	SetTouch( ItemTouch );
+	SetTouch( &CItem::ItemTouch );
 
 	// Play respawn sound
 	EMIT_SOUND_DYN( ENT(pev), CHAN_WEAPON, "items/item_respawn.wav", 1, ATTN_NORM, 0, 100 );
@@ -71,7 +71,7 @@ void CItem::Respawn( float flTime )
 }
 
 	// Come back in time
-	SetThink ( Materialize );
+	SetThink ( &CItem::Materialize );
 	pev->nextthink = gpGlobals->time + flTime;
 }
 

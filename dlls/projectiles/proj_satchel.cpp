@@ -122,10 +122,10 @@ CSCharge * CSCharge :: ShootSCharge( entvars_t *pevOwner, Vector vecStart, Vecto
 	pSCharge->pev->owner = ENT(pevOwner);
 	pSCharge->pev->avelocity.y = 400;
 	
-	pSCharge->SetThink( SatchelThink );
+	pSCharge->SetThink( &CSCharge::SatchelThink );
 	pSCharge->pev->nextthink = gpGlobals->time + 0.1;
-	pSCharge->SetUse( DetonateUse );
-	pSCharge->SetTouch( SlideTouch );
+	pSCharge->SetUse( &CSCharge::DetonateUse );
+	pSCharge->SetTouch( &CSCharge::SlideTouch );
 	pSCharge->pev->spawnflags = SF_DETONATE;
 	return pSCharge;
 }

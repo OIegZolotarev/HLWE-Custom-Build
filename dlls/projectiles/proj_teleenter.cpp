@@ -32,7 +32,7 @@ CTeleenter *CTeleenter::ShootTeleenter( entvars_t *pevOwner, Vector vecStart)
 
 	UTIL_SetOrigin( pTeleenter->pev, vecStart );
 	pTeleenter->pev->owner = ENT(pevOwner);
-	pTeleenter->SetThink ( MakeBlast );
+	pTeleenter->SetThink ( &CTeleenter::MakeBlast );
 
 	if (UTIL_PointContents(vecStart) == CONTENTS_WATER)
 		pTeleenter->pev->nextthink = gpGlobals->time + 0.1;

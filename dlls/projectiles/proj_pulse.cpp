@@ -17,7 +17,7 @@ void CPulse :: Spawn( void )
 	UTIL_SetSize(pev, g_vecZero, g_vecZero );
 	pev->effects |= EF_NODRAW;
 
-	SetThink ( DamageThink );
+	SetThink ( &CPulse::DamageThink );
 	pev->nextthink = gpGlobals->time + 0.1;
 	pev->movetype = MOVETYPE_NONE;
 	PulseStayTime = 20; //2 seconds

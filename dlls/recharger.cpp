@@ -123,7 +123,7 @@ void CRecharger::RealReSpawn ( void )
 		break;
 	}
 
-	SetThink ( SUB_DoNothing );
+	SetThink ( &CBaseEntity::SUB_DoNothing );
 	pev->takedamage = DAMAGE_YES;
 	pev->effects = 0;
 	pev->health = pev->max_health = 125;
@@ -231,7 +231,7 @@ void CRecharger::RealUse( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYP
 	}
 
 	pev->nextthink = gpGlobals->time + 0.5;
-	SetThink(Off);
+	SetThink(&CRecharger::Off);
 
 	if (m_flNextCharge >= gpGlobals->time)
 		return;
@@ -341,7 +341,7 @@ void CRecharger::Recharge(void)
 
 	m_iJuice = give_charger.value;
 	pev->skin = 0;			
-	SetThink( SUB_DoNothing );
+	SetThink( &CBaseEntity::SUB_DoNothing );
 }
 
 void CRecharger::Off(void)
@@ -369,10 +369,10 @@ void CRecharger::Off(void)
 	if (m_iJuice <= 0)
 	{
 		pev->nextthink = gpGlobals->time + CHARGER_REACTIVATE_TIME;
-		SetThink(Recharge);
+		SetThink(&CRecharger::Recharge);
 	}
 	else
-		SetThink( SUB_DoNothing );
+		SetThink( &CBaseEntity::SUB_DoNothing );
 }
 
 void CRecharger::Killed(entvars_t *pevAttacker, int iGib)
@@ -380,7 +380,7 @@ void CRecharger::Killed(entvars_t *pevAttacker, int iGib)
 	Off();
 	pev->health = 0;
 	pev->takedamage = DAMAGE_NO;
-	SetThink (RespawnThink);
+	SetThink (&CRecharger::RespawnThink);
 	pev->nextthink = gpGlobals->time + CHARGER_REACTIVATE_TIME;//45 seconds till respawn
 	pev->effects = EF_NODRAW;
 	UTIL_SetSize(pev, g_vecZero, g_vecZero);

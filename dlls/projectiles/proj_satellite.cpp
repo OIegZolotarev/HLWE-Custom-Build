@@ -24,7 +24,7 @@ void CSatelliteStrike::Explode( TraceResult *pTrace, int bitsDamageType )
 	pev->effects |= EF_NODRAW;
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
-	SetThink(Irradiate);
+	SetThink(&CSatelliteStrike::Irradiate);
 	pev->nextthink = gpGlobals->time + 0.3;
 }
 
@@ -60,7 +60,7 @@ void CSatelliteStrike :: TumbleThink( void )
 
 	if (pev->dmgtime <= gpGlobals->time)
 	{
-		SetThink( Detonate );
+		SetThink( &CSatelliteStrike::Detonate );
 	}
 	if (pev->waterlevel != 0)
 	{
@@ -94,9 +94,9 @@ CSatelliteStrike * CSatelliteStrike:: ShootSatelliteStrike( entvars_t *pevOwner,
 	pSatelliteStrike->pev->owner = ENT(pevOwner); 
 
 	pSatelliteStrike->pev->dmgtime = gpGlobals->time + time;
-	pSatelliteStrike->SetThink( TumbleThink );
+	pSatelliteStrike->SetThink( &CSatelliteStrike::TumbleThink );
 	pSatelliteStrike->pev->nextthink = gpGlobals->time + 0.1;
-	pSatelliteStrike->SetTouch( BounceTouch );
+	pSatelliteStrike->SetTouch( &CSatelliteStrike::BounceTouch );
 	pSatelliteStrike->pev->friction = 1;
 	pSatelliteStrike->pev->dmg = dmg_satellite.value * (mp_wpn_power.value/100); 
 	return pSatelliteStrike;

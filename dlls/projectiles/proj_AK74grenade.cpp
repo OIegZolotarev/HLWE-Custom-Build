@@ -67,7 +67,7 @@ CAK74grenade *CAK74grenade::ShootAK74grenade( entvars_t *pevOwner, Vector vecSta
 	pAK74grenade->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-100,100) + gpGlobals->v_up * RANDOM_FLOAT(-100,100);
 	pAK74grenade->pev->angles = UTIL_VecToAngles (pAK74grenade->pev->velocity);
 	pAK74grenade->pev->owner = ENT(pevOwner);
-	pAK74grenade->SetTouch( ExplodeTouch );
+	pAK74grenade->SetTouch( &CAK74grenade::ExplodeTouch );
 	pAK74grenade->pev->dmg = dmg_ak74_grenade.value * (mp_wpn_power.value/100);
 	FX_Trail(pAK74grenade->pev->origin, pAK74grenade->entindex(), PROJ_AK74 );
 	return pAK74grenade;

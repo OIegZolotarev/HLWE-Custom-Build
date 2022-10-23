@@ -66,7 +66,7 @@ CM203grenade *CM203grenade::ShootM203grenade( entvars_t *pevOwner, Vector vecSta
 	pM203grenade->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-40,40) + gpGlobals->v_up * RANDOM_FLOAT(-40,40);
 	pM203grenade->pev->angles = UTIL_VecToAngles (pM203grenade->pev->velocity);
 	pM203grenade->pev->owner = ENT(pevOwner);
-	pM203grenade->SetTouch( ExplodeTouch );
+	pM203grenade->SetTouch( &CM203grenade::ExplodeTouch );
 	pM203grenade->pev->dmg = dmg_mp5_grenade.value * (mp_wpn_power.value/100);
 	FX_Trail(pM203grenade->pev->origin, pM203grenade->entindex(), PROJ_M203 );
 	return pM203grenade;

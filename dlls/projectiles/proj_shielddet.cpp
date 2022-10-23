@@ -14,7 +14,7 @@ void CPshieldDet :: Spawn( void )
 	pev->effects |= EF_NODRAW;
 	pev->dmg = dmg_shielddet.value * (mp_wpn_power.value/100);
 	SET_MODEL(ENT(pev), "models/projectiles.mdl");
-	SetThink ( DamageThink );
+	SetThink ( &CPshieldDet::DamageThink );
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 

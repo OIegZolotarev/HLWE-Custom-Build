@@ -51,7 +51,7 @@ void Chellfire::ExplodeTouch( CBaseEntity *pOther )
 		SetTouch(NULL);
 		FX_Trail( pev->origin, entindex(), (UTIL_PointContents(pev->origin) == CONTENT_WATER)?PROJ_INCENDIARY_DETONATE_WATER:PROJ_INCENDIARY_DETONATE);
 		FireStayTime = 40;
-		SetThink( Burn );
+		SetThink( &Chellfire::Burn );
 		pev->nextthink = gpGlobals->time + 0.2;
 }
 
@@ -98,12 +98,12 @@ Chellfire *Chellfire::ShootHellfire( entvars_t *pevOwner, Vector vecStart, Vecto
 	FX_Trail(phellfire->pev->origin, phellfire->entindex(), Homing?PROJ_INCENDIARY2:PROJ_INCENDIARY );
 
 	if (Homing)
-		phellfire->SetThink ( IgniteFollow );
+		phellfire->SetThink ( &Chellfire::IgniteFollow );
 	else
-		phellfire->SetThink ( Ignite );
+		phellfire->SetThink ( &Chellfire::Ignite );
 
 	phellfire->pev->nextthink = 0.1;
-	phellfire->SetTouch( ExplodeTouch );
+	phellfire->SetTouch( &Chellfire::ExplodeTouch );
 	phellfire->pev->dmg = dmg_incendiary.value * (mp_wpn_power.value/100);
 	return phellfire;
 }
@@ -116,7 +116,7 @@ void Chellfire :: Ignite( void  )
 void Chellfire :: IgniteFollow( void  )
 {
 	EMIT_SOUND(ENT(pev), CHAN_VOICE, "weapons/incendiaryrocket.wav", 1, ATTN_LOW_HIGH);
-	SetThink ( Follow );
+	SetThink ( &Chellfire::Follow );
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 

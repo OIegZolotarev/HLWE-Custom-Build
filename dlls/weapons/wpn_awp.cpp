@@ -114,7 +114,7 @@ void Cawp::PrimaryAttack()
 	m_pPlayer->FireMagnumBullets(m_pPlayer->GetGunPosition(), gpGlobals->v_forward, VECTOR_CONE_0DEGREES, 16384, BULLET_338Magnum, m_pPlayer->pev);
 	FX_FireGun(m_pPlayer->pev->v_angle, m_pPlayer->entindex(), (m_pPlayer->m_fHeavyArmor)?AWP_FIRE_SOLID:AWP_FIRE, m_pPlayer->m_fHeavyArmor?1:0, FIREGUN_AWP );
 
-	SetThink( shellcasing ); 
+	SetThink( &Cawp::shellcasing ); 
 		(m_pPlayer->m_fHeavyArmor)?pev->nextthink = gpGlobals->time + 0.6:pev->nextthink = gpGlobals->time + 1.15;
 
 	(m_pPlayer->m_fHeavyArmor)?m_pPlayer->m_flNextAttack = UTIL_WeaponTimeBase() + 1.2:m_pPlayer->m_flNextAttack = UTIL_WeaponTimeBase() + 1.8;

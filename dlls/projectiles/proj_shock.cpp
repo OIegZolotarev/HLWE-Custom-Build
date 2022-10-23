@@ -73,19 +73,19 @@ CShock *CShock::ShootShock( entvars_t *pevOwner, Vector vecStart, Vector vecVelo
 	pShock->pev->velocity = vecVelocity;
 	pShock->pev->angles = UTIL_VecToAngles (pShock->pev->velocity);
 	pShock->pev->owner = ENT(pevOwner);
-	pShock->SetTouch( ExplodeTouch );
+	pShock->SetTouch( &CShock::ExplodeTouch );
 	FX_Trail(pShock->pev->origin, pShock->entindex(), PROJ_SHOCK);
 
 	if (LightningBall)
 	{
 		pShock->pev->dmg = dmg_lgtng_ball.value * (mp_wpn_power.value/100);
-		pShock->SetThink ( Lightning );
+		pShock->SetThink ( &CShock::Lightning );
 		pShock->pev->frags = 1;
 	}
 	else
 	{
 		pShock->pev->dmg = dmg_smartgun.value * (mp_wpn_power.value/100);
-		pShock->SetThink ( Follow );
+		pShock->SetThink ( &CShock::Follow );
 		pShock->pev->frags = 0;
 
 	}

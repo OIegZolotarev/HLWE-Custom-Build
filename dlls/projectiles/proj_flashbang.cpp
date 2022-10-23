@@ -58,7 +58,7 @@ void CFlashBang :: TumbleThink( void )
 
 	if (pev->dmgtime <= gpGlobals->time)
 	{
-		SetThink( Detonate );
+		SetThink( &CFlashBang::Detonate );
 	}
 	if (pev->waterlevel != 0)
 	{
@@ -87,10 +87,10 @@ CFlashBang * CFlashBang:: ShootFlashbang_projectile( entvars_t *pevOwner, Vector
 	pFlashBang->pev->angles = UTIL_VecToAngles(pFlashBang->pev->velocity);
 	pFlashBang->pev->owner = ENT(pevOwner);
 	
-	pFlashBang->SetTouch( BounceTouch );	// Bounce if touched
+	pFlashBang->SetTouch( &CFlashBang::BounceTouch );	// Bounce if touched
 	
 	pFlashBang->pev->dmgtime = gpGlobals->time + time;
-	pFlashBang->SetThink( TumbleThink );
+	pFlashBang->SetThink( &CFlashBang::TumbleThink );
 	pFlashBang->pev->nextthink = gpGlobals->time + 0.1;
 	pFlashBang->pev->framerate = 1.0;
 	pFlashBang->pev->gravity = 1;

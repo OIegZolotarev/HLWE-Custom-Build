@@ -67,9 +67,9 @@ CGluon2 *CGluon2::ShootGluon2( entvars_t *pevOwner, Vector vecStart, Vector vecV
 	pGluon2->pev->velocity = vecVelocity;
 	pGluon2->pev->angles = UTIL_VecToAngles (pGluon2->pev->velocity);
 	pGluon2->pev->owner = ENT(pevOwner);
-	pGluon2->SetThink ( Fly );
+	pGluon2->SetThink ( &CGluon2::Fly );
 	pGluon2->pev->nextthink = 0.001;
-	pGluon2->SetTouch( ExplodeTouch );
+	pGluon2->SetTouch( &CGluon2::ExplodeTouch );
 	pGluon2->pev->dmg = (dmg_gluon.value*flWastedAmmo) * (mp_wpn_power.value/100);
 	FX_Trail(pGluon2->pev->origin, pGluon2->entindex(), PROJ_GLUON2);
 	return pGluon2;

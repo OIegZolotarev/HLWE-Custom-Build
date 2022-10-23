@@ -133,7 +133,7 @@ void CPython::Reload( void )
 	m_iClip=0;
 	DefaultReload( 6, PYTHON_RELOAD, 3.0 );
 
-	SetThink( shellcasing ); 
+	SetThink( &CPython::shellcasing ); 
 	pev->nextthink = gpGlobals->time + 1.5; 
 }
 

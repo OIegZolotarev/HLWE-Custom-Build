@@ -121,7 +121,7 @@ void CBaseTurret::Initialize(void)
 	m_flLastSight = gpGlobals->time + m_flMaxWait;
 
 	FX_Explosion( pev->origin+ Vector(0,0,20), EXPLOSION_TURRET_SPAWN );
-	SetThink(Materialize);		
+	SetThink(&CBaseTurret::Materialize);		
 	pev->nextthink = gpGlobals->time + 0.05;
 }
 
@@ -139,7 +139,7 @@ void CBaseTurret::Materialize(void)
 		pev->renderamt = 255;
 		pev->renderfx = ~kRenderFxGlowShell;
 		pev->rendermode = kRenderNormal;
-		SetThink(AutoSearchThink);		
+		SetThink(&CBaseTurret::AutoSearchThink);		
 	}
 	pev->nextthink = gpGlobals->time + 0.02;
 }
@@ -176,7 +176,7 @@ void CBaseTurret::ActiveThink(void)
 	{
 		m_hEnemy = NULL;
 		m_flLastSight = gpGlobals->time + m_flMaxWait;
-		SetThink(SearchThink);
+		SetThink(&CBaseTurret::SearchThink);
 		return;
 	}
 
@@ -190,7 +190,7 @@ void CBaseTurret::ActiveThink(void)
 			{ 
 				m_hEnemy = NULL;
 				m_flLastSight = gpGlobals->time + m_flMaxWait;
-				SetThink(SearchThink);
+				SetThink(&CBaseTurret::SearchThink);
 			return;
 			}
 		}
@@ -216,7 +216,7 @@ void CBaseTurret::ActiveThink(void)
 			{
 				m_hEnemy = NULL;
 				m_flLastSight = gpGlobals->time + m_flMaxWait;
-				SetThink(SearchThink);
+				SetThink(&CBaseTurret::SearchThink);
 				return;
 			}
 		}
@@ -295,7 +295,7 @@ void CBaseTurret::Deploy(void)
 
 		SetTurretAnim(TURRET_ANIM_SPIN);
 		pev->framerate = 0;
-		SetThink(SearchThink);
+		SetThink(&CBaseTurret::SearchThink);
 	}
 	m_flLastSight = gpGlobals->time + m_flMaxWait;
 }
@@ -360,7 +360,7 @@ void CBaseTurret::SearchThink(void)
     if (m_hEnemy != NULL)
     {
         m_flLastSight = 0;
-        SetThink(ActiveThink);
+        SetThink(&CBaseTurret::ActiveThink);
     }
     else
     {
@@ -393,7 +393,7 @@ void CBaseTurret::AutoSearchThink(void)
 	}
 
 	if (m_hEnemy != NULL)
-		SetThink(Deploy);
+		SetThink(&CBaseTurret::Deploy);
 }
 
 int CBaseTurret::MoveTurret(void)
@@ -493,7 +493,7 @@ int CBaseTurret::RealTakeDamage(entvars_t *pevInflictor, entvars_t *pevAttacker,
 
 	if (!m_iOn && pev->rendermode == kRenderNormal)
 	{
-		SetThink( Deploy );
+		SetThink( &CBaseTurret::Deploy );
 		SetUse( NULL );
 		pev->nextthink = gpGlobals->time + 0.1;
 	}
@@ -539,7 +539,7 @@ int CBaseTurret::RealTakeDamage(entvars_t *pevInflictor, entvars_t *pevAttacker,
 		pev->takedamage = DAMAGE_NO;
 		pev->dmgtime = gpGlobals->time;
 		SetUse(NULL);
-		SetThink(TurretDeath);
+		SetThink(&CBaseTurret::TurretDeath);
 		SUB_UseTargets( this, USE_ON, 0 );
 		pev->nextthink = gpGlobals->time + 0.1;
 		UpdateInfoForBuilder();
@@ -635,7 +635,7 @@ void CSentry::Spawn()
 	m_iDeployHeight 	= 64;
 	m_iMinPitch		= -60;
 	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 32));
-	SetThink(Initialize);	
+	SetThink(&CBaseTurret::Initialize);	
 	pev->nextthink = gpGlobals->time + 1; 
 }
 
@@ -677,7 +677,7 @@ void CMissileT::Spawn()
 	m_iDeployHeight 	= 64;
 	m_iMinPitch		= -60;
 	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 32));
-	SetThink(Initialize);	
+	SetThink(&CBaseTurret::Initialize);	
 	pev->nextthink = gpGlobals->time + 1; 
 }
 
@@ -723,7 +723,7 @@ void CIonT::Spawn()
 	m_iDeployHeight 	= 64;
 	m_iMinPitch		= -60;
 	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 32));
-	SetThink(Initialize);	
+	SetThink(&CBaseTurret::Initialize);	
 	pev->nextthink = gpGlobals->time + 1; 
 }
 

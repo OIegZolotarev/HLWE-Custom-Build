@@ -137,7 +137,7 @@ void CShotgun::PrimaryAttack()
 		m_pPlayer->FireMagnumBullets(m_pPlayer->GetGunPosition(), gpGlobals->v_forward, (m_pPlayer->pev->flags & FL_DUCKING)?VECTOR_CONE_10DEGREES:VECTOR_CONE_11DEGREES, 16384, BULLET_BUCKSHOT, m_pPlayer->pev);
 	FX_FireGun(m_pPlayer->pev->v_angle, m_pPlayer->entindex(), (m_pPlayer->m_fHeavyArmor)?SHOTGUN_FIRE_SOLID:SHOTGUN_FIRE, m_pPlayer->m_fHeavyArmor?1:0, FIREGUN_SHOTGUN );
 
-	SetThink( shellcasing ); 
+	SetThink( &CShotgun::shellcasing ); 
 	(m_pPlayer->m_fHeavyArmor)?pev->nextthink = gpGlobals->time + 0.25:pev->nextthink = gpGlobals->time + 0.5;
 
 	if (m_iClip != 0)

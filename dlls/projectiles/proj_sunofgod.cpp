@@ -21,7 +21,7 @@ void CSunOfGod::Explode( TraceResult *pTrace, int bitsDamageType )
 
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
-	SetThink( Irradiate );
+	SetThink( &CSunOfGod::Irradiate );
 	pev->nextthink = gpGlobals->time + 0.3;
 }
 
@@ -74,9 +74,9 @@ CSunOfGod *CSunOfGod::ShootSunOfGod( entvars_t *pevOwner, Vector vecStart)
 	pSunOfGod->pev->velocity = gpGlobals->v_forward * 0;
 	pSunOfGod->pev->angles = UTIL_VecToAngles (pSunOfGod->pev->velocity);
 	pSunOfGod->pev->owner = ENT(pevOwner);
-	pSunOfGod->SetThink ( Animate );
+	pSunOfGod->SetThink ( &CSunOfGod::Animate );
 	pSunOfGod->pev->nextthink = gpGlobals->time + 0.1;
-	pSunOfGod->SetTouch( ExplodeTouch );
+	pSunOfGod->SetTouch( &CSunOfGod::ExplodeTouch );
 	pSunOfGod->pev->dmg = dmg_sunofgod.value * (mp_wpn_power.value/100);
 	FX_Trail(pSunOfGod->pev->origin, pSunOfGod->entindex(), PROJ_SUNOFGOD);
 	return pSunOfGod;

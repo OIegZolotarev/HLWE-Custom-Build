@@ -284,7 +284,7 @@ void CFuncPlat :: Spawn( )
 	{
 		UTIL_SetOrigin (pev, m_vecPosition1);
 		m_toggle_state = TS_AT_TOP;
-		SetUse( PlatUse );
+		SetUse( &CFuncPlat::PlatUse );
 	}
 	else
 	{
@@ -391,7 +391,7 @@ void CFuncPlat :: GoDown( void )
 
 	ASSERT(m_toggle_state == TS_AT_TOP || m_toggle_state == TS_GOING_UP);
 	m_toggle_state = TS_GOING_DOWN;
-	SetMoveDone(CallHitBottom);
+	SetMoveDone(&CFuncPlat::CallHitBottom);
 	LinearMove(m_vecPosition2, pev->speed);
 }
 
@@ -422,7 +422,7 @@ void CFuncPlat :: GoUp( void )
 	
 	ASSERT(m_toggle_state == TS_AT_BOTTOM || m_toggle_state == TS_GOING_DOWN);
 	m_toggle_state = TS_GOING_UP;
-	SetMoveDone(CallHitTop);
+	SetMoveDone(&CFuncPlat::CallHitTop);
 	LinearMove(m_vecPosition1, pev->speed);
 }
 
@@ -444,7 +444,7 @@ void CFuncPlat :: HitTop( void )
 	if ( !IsTogglePlat() )
 	{
 		// After a delay, the platform will automatically start going down again.
-		SetThink( CallGoDown );
+		SetThink( &CFuncPlat::CallGoDown );
 		pev->nextthink = pev->ltime + 3;
 	}
 }
@@ -694,7 +694,7 @@ void CFuncTrain :: Wait( void )
 			STOP_SOUND( edict(), CHAN_STATIC, (char*)STRING(pev->noiseMovement) );
 		if ( pev->noiseStopMoving )
 			EMIT_SOUND (ENT(pev), CHAN_VOICE, (char*)STRING(pev->noiseStopMoving), m_volume, ATTN_NORM);
-		SetThink( Next );
+		SetThink( &CFuncTrain::Next );
 	}
 	else
 	{
@@ -758,7 +758,7 @@ void CFuncTrain :: Next( void )
 		if ( pev->noiseMovement )
 			EMIT_SOUND (ENT(pev), CHAN_STATIC, (char*)STRING(pev->noiseMovement), m_volume, ATTN_NORM);
 		ClearBits(pev->effects, EF_NOINTERP);
-		SetMoveDone( Wait );
+		SetMoveDone( &CFuncTrain::Wait );
 		LinearMove (pTarg->pev->origin - (pev->mins + pev->maxs)* 0.5, pev->speed);
 	}
 }
@@ -780,7 +780,7 @@ void CFuncTrain :: Activate( void )
 		if ( FStringNull(pev->targetname) )
 		{	// not triggered, so start immediately
 			pev->nextthink = pev->ltime + 0.1;
-			SetThink( Next );
+			SetThink( &CFuncTrain::Next );
 		}
 		else
 			pev->spawnflags |= SF_TRAIN_WAIT_RETRIGGER;
@@ -851,7 +851,7 @@ void CFuncTrain::OverrideReset( void )
 		}
 		else	// Keep moving for 0.1 secs, then find path_corner again and restart
 		{
-			SetThink( Next );
+			SetThink( &CFuncTrain::Next );
 			pev->nextthink = pev->ltime + 0.1;
 		}
 	}
@@ -1047,7 +1047,7 @@ void CFuncTrackTrain :: UpdateSound( void )
 	if (!pev->noise)
 		return;
 
-	flpitch = TRAIN_STARTPITCH + (abs(pev->speed) * (TRAIN_MAXPITCH - TRAIN_STARTPITCH) / TRAIN_MAXSPEED);
+	flpitch = TRAIN_STARTPITCH + (fabs(pev->speed) * (TRAIN_MAXPITCH - TRAIN_STARTPITCH) / TRAIN_MAXSPEED);
 
 	if (!m_soundPlaying)
 	{
@@ -1172,7 +1172,7 @@ void CFuncTrackTrain :: Next( void )
 			}
 
 		}
-		SetThink( Next );
+		SetThink( &CFuncTrackTrain::Next );
 		NextThink( pev->ltime + time, TRUE );
 	}
 	else	// end of path, stop
@@ -1194,7 +1194,7 @@ void CFuncTrackTrain :: Next( void )
 			// no, how long to get there?
 			time = distance / m_oldSpeed;
 			pev->velocity = pev->velocity * (m_oldSpeed / distance);
-			SetThink( DeadEnd );
+			SetThink( &CFuncTrackTrain::DeadEnd );
 			NextThink( pev->ltime + time, FALSE );
 		}
 		else
@@ -1312,7 +1312,7 @@ void CFuncTrackTrain :: Find( void )
 		pev->angles.x = 0;
     UTIL_SetOrigin( pev, nextPos );
 	NextThink( pev->ltime + 0.1, FALSE );
-	SetThink( Next );
+	SetThink( &CFuncTrackTrain::Next );
 	pev->speed = m_startSpeed;
 
 	UpdateSound();
@@ -1362,7 +1362,7 @@ void CFuncTrackTrain :: NearestPath( void )
 	if ( pev->speed != 0 )
 	{
 		NextThink( pev->ltime + 0.1, FALSE );
-		SetThink( Next );
+		SetThink( &CFuncTrackTrain::Next );
 	}
 }
 
@@ -1370,7 +1370,7 @@ void CFuncTrackTrain :: NearestPath( void )
 void CFuncTrackTrain::OverrideReset( void )
 {
 	NextThink( pev->ltime + 0.1, FALSE );
-	SetThink( NearestPath );
+	SetThink( &CFuncTrackTrain::NearestPath );
 }
 
 
@@ -1429,7 +1429,7 @@ void CFuncTrackTrain :: Spawn( void )
 // start trains on the next frame, to make sure their targets have had
 // a chance to spawn/activate
 	NextThink( pev->ltime + 0.1, FALSE );
-	SetThink( Find );
+	SetThink( &CFuncTrackTrain::Find );
 	Precache();
 }
 
@@ -1497,7 +1497,7 @@ void CFuncTrainControls :: Spawn( void )
 	UTIL_SetSize( pev, pev->mins, pev->maxs );
 	UTIL_SetOrigin( pev, pev->origin );
 	
-	SetThink( Find );
+	SetThink( &CFuncTrainControls::Find );
 	pev->nextthink = gpGlobals->time;
 }
 
@@ -1609,7 +1609,7 @@ void CFuncTrackChange :: Spawn( void )
 
 	EnableUse();
 	pev->nextthink = pev->ltime + 2.0;
-	SetThink( Find );
+	SetThink( &CFuncTrackChange::Find );
 	Precache();
 }
 
@@ -1660,7 +1660,7 @@ void CFuncTrackChange :: KeyValue( KeyValueData *pkvd )
 void CFuncTrackChange::OverrideReset( void )
 {
 	pev->nextthink = pev->ltime + 1.0;
-	SetThink( Find );
+	SetThink( &CFuncTrackChange::Find );
 }
 
 void CFuncTrackChange :: Find( void )
@@ -1770,14 +1770,14 @@ void CFuncTrackChange :: GoDown( void )
 	// If ROTMOVE, move & rotate
 	if ( FBitSet( pev->spawnflags, SF_TRACK_DONT_MOVE ) )
 	{
-		SetMoveDone( CallHitBottom );
+		SetMoveDone( &CFuncPlat::CallHitBottom );
 		m_toggle_state = TS_GOING_DOWN;
 		AngularMove( m_start, pev->speed );
 	}
 	else
 	{
 		CFuncPlat :: GoDown();
-		SetMoveDone( CallHitBottom );
+		SetMoveDone( &CFuncPlat::CallHitBottom );
 		RotMove( m_start, pev->nextthink - pev->ltime );
 	}
 	// Otherwise, rotate first, move second
@@ -1806,14 +1806,14 @@ void CFuncTrackChange :: GoUp( void )
 	if ( FBitSet( pev->spawnflags, SF_TRACK_DONT_MOVE ) )
 	{
 		m_toggle_state = TS_GOING_UP;
-		SetMoveDone( CallHitTop );
+		SetMoveDone( &CFuncPlat::CallHitTop );
 		AngularMove( m_end, pev->speed );
 	}
 	else
 	{
 		// If ROTMOVE, move & rotate
 		CFuncPlat :: GoUp();
-		SetMoveDone( CallHitTop );
+		SetMoveDone( &CFuncPlat::CallHitTop );
 		RotMove( m_end, pev->nextthink - pev->ltime );
 	}
 	
@@ -2067,7 +2067,7 @@ void CGunTarget::Spawn( void )
 
 	if ( pev->spawnflags & FGUNTARGET_START_ON )
 	{
-		SetThink( Start );
+		SetThink( &CGunTarget::Start );
 		pev->nextthink = pev->ltime + 0.3;
 	}
 }
@@ -2105,7 +2105,7 @@ void CGunTarget::Next( void )
 		Stop();
 		return;
 	}
-	SetMoveDone( Wait );
+	SetMoveDone( &CGunTarget::Wait );
 	LinearMove( pTarget->pev->origin - (pev->mins + pev->maxs) * 0.5, pev->speed );
 }
 
@@ -2131,7 +2131,7 @@ void CGunTarget::Wait( void )
 	m_flWait = pTarget->GetDelay();
 
 	pev->target = pTarget->pev->target;
-	SetThink( Next );
+	SetThink( &CGunTarget::Next );
 	if (m_flWait != 0)
 	{// -1 wait will wait forever!		
 		pev->nextthink = pev->ltime + m_flWait;

@@ -300,8 +300,10 @@ void Host_Say( edict_t *pEntity, int teamonly )
 		p[strlen(p)-1] = 0;
 	}
 
+	char* pc;
+
 // make sure the text has content
-	for ( char *pc = p; pc != NULL && *pc != 0; pc++ )
+	for ( pc = p; pc != NULL && *pc != 0; pc++ )
 	{
 		if ( isprint( *pc ) && !isspace( *pc ) )
 		{

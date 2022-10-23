@@ -210,10 +210,10 @@ CBiomass *CBiomass :: ShootBiomass( entvars_t *pevOwner, Vector vecStart, Vector
 	pBiomass->Spawn();
 	pBiomass->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-50,50) + gpGlobals->v_up * RANDOM_FLOAT(-50,50);
 	pBiomass->pev->owner = ENT(pevOwner);
-	pBiomass->SetThink( StayInWorld );
+	pBiomass->SetThink( &CBiomass::StayInWorld );
 	pBiomass->pev->nextthink = gpGlobals->time + 0.1;
-	pBiomass->SetUse( DetonateUse );
-	pBiomass->SetTouch( SlideTouch );
+	pBiomass->SetUse( &CBiomass::DetonateUse );
+	pBiomass->SetTouch( &CBiomass::SlideTouch );
 	pBiomass->pev->spawnflags = SF_DETONATE;
 	pBiomass->pev->frags = Time;
 	pBiomass->pev->dmg = dmg_biorifle.value * (mp_wpn_power.value/100);

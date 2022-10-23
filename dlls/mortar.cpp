@@ -83,7 +83,7 @@ void CFuncMortarField :: Spawn( void )
 	SET_MODEL(ENT(pev), STRING(pev->model));    // set size and link into world
 	pev->movetype = MOVETYPE_NONE;
 	SetBits( pev->effects, EF_NODRAW );
-	SetUse( FieldUse );
+	SetUse( &CFuncMortarField::FieldUse );
 	Precache();
 }
 
@@ -173,7 +173,7 @@ void CMortar::Spawn( )
 {
 	pev->movetype	= MOVETYPE_NONE;
 	pev->solid	= SOLID_NOT;
-	SetThink( MortarExplode );
+	SetThink( &CMortar::MortarExplode );
 }
 
 void CMortar::MortarExplode( void )

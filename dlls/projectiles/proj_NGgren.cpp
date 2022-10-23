@@ -28,7 +28,7 @@ void CNGgrenade::Explode( TraceResult *pTrace, int bitsDamageType )
 	FX_Trail( pev->origin, entindex(), PROJ_NERVEGREN_DETONATE );
 
 	SetTouch(NULL);
-	SetThink( Smoke );
+	SetThink( &CNGgrenade::Smoke );
 	pev->nextthink = gpGlobals->time + 0.2;
 }
 
@@ -72,7 +72,7 @@ void CNGgrenade::BounceTouch( CBaseEntity *pOther )
 		ClearMultiDamage( );
 		pOther->TraceAttack(pevOwner, pev->dmg*3, gpGlobals->v_forward, &tr, DMG_BULLETMAGNUM ); 
 		ApplyMultiDamage( pev, pevOwner);
-		SetThink( Detonate );
+		SetThink( &CNGgrenade::Detonate );
 		return;
 	}
 	if ( UTIL_PointContents(pev->origin) == CONTENT_SKY )
@@ -98,7 +98,7 @@ void CNGgrenade :: TumbleThink( void )
 	pev->nextthink = gpGlobals->time + 0.1;
 
 	if (pev->dmgtime <= gpGlobals->time)
-		SetThink( Detonate );
+		SetThink( &CNGgrenade::Detonate );
 }
 
 void CNGgrenade:: Spawn( void )
@@ -120,9 +120,9 @@ CNGgrenade *CNGgrenade::ShootNGgrenade( entvars_t *pevOwner, Vector vecStart, Ve
 	pNGgrenade->pev->velocity = vecVelocity;
 	pNGgrenade->pev->angles = UTIL_VecToAngles(pNGgrenade->pev->velocity);
 	pNGgrenade->pev->owner = ENT(pevOwner); 
-	pNGgrenade->SetTouch( BounceTouch ); 
+	pNGgrenade->SetTouch( &CNGgrenade::BounceTouch ); 
 	pNGgrenade->pev->dmgtime = gpGlobals->time + time;
-	pNGgrenade->SetThink( TumbleThink );
+	pNGgrenade->SetThink( &CNGgrenade::TumbleThink );
 	pNGgrenade->pev->nextthink = gpGlobals->time + 0.1;
 	pNGgrenade->pev->gravity = 1;
 	pNGgrenade->pev->friction = 0.8;

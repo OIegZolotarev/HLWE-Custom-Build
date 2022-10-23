@@ -47,7 +47,7 @@ void CFlame::ExplodeTouch( CBaseEntity *pOther )
 
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
-	SetThink( Burn );
+	SetThink( &CFlame::Burn );
 	pev->nextthink = gpGlobals->time + 0.2;
 }
 
@@ -85,9 +85,9 @@ CFlame *CFlame::ShootFlame( entvars_t *pevOwner, Vector vecStart, Vector vecVelo
 	pFlame->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-40,40) + gpGlobals->v_up * RANDOM_FLOAT(-40,40);
 	pFlame->pev->angles = UTIL_VecToAngles(pFlame->pev->velocity);
 	pFlame->pev->owner = ENT(pevOwner);
-	pFlame->SetTouch( ExplodeTouch );
+	pFlame->SetTouch( &CFlame::ExplodeTouch );
 	pFlame->pev->dmg = dmg_flamethrower.value * (mp_wpn_power.value/100);
-	pFlame->SetThink ( Fly );
+	pFlame->SetThink ( &CFlame::Fly );
 	pFlame->pev->nextthink = 0.1;
 	FX_Trail(pFlame->pev->origin, pFlame->entindex(), PROJ_FLAME );
 	return pFlame;

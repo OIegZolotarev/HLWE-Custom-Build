@@ -110,7 +110,7 @@ CBlackHole *CBlackHole::ShootBlackHole( entvars_t *pevOwner, Vector vecStart)
 
 	UTIL_SetOrigin( pBlackHole->pev, vecStart );
 	pBlackHole->pev->owner = ENT(pevOwner);
-	pBlackHole->SetThink ( DesintegrateThink );
+	pBlackHole->SetThink ( &CBlackHole::DesintegrateThink );
 	pBlackHole->pev->nextthink = gpGlobals->time + 0.1;
 	FX_Trail(pBlackHole->pev->origin, pBlackHole->entindex(), PROJ_BLACKHOLE);
 	return pBlackHole;

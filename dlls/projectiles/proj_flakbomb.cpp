@@ -69,7 +69,7 @@ CFlakBomb *CFlakBomb::ShootFlakBomb( entvars_t *pevOwner, Vector vecStart, Vecto
 	pFlakBomb->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-30,30) + gpGlobals->v_up * RANDOM_FLOAT(-30,30);
 	pFlakBomb->pev->angles = UTIL_VecToAngles (pFlakBomb->pev->velocity);
 	pFlakBomb->pev->owner = ENT(pevOwner);
-	pFlakBomb->SetTouch( ExplodeTouch );
+	pFlakBomb->SetTouch( &CFlakBomb::ExplodeTouch );
 	pFlakBomb->pev->dmg = dmg_flak_bomb.value * (mp_wpn_power.value/100);
 	FX_Trail(pFlakBomb->pev->origin, pFlakBomb->entindex(), PROJ_FLAKBOMB );
 	return pFlakBomb;

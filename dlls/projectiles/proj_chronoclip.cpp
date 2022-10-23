@@ -24,7 +24,7 @@ void CChronoClip::Explode( TraceResult *pTrace, int bitsDamageType )
 	pev->takedamage = DAMAGE_NO;
 	pev->effects |= EF_NODRAW;
 	pev->velocity = g_vecZero;
-	SetThink( Irradiate );
+	SetThink( &CChronoClip::Irradiate );
 	pev->nextthink = gpGlobals->time + 0.3;
 }
 
@@ -74,7 +74,7 @@ void CChronoClip :: TumbleThink( void )
 
 	if (pev->dmgtime <= gpGlobals->time)
 	{
-		SetThink( Detonate );
+		SetThink( &CChronoClip::Detonate );
 	}
 	if (pev->waterlevel != 0)
 	{
@@ -100,9 +100,9 @@ CChronoClip * CChronoClip:: ShootChronoClip( entvars_t *pevOwner, Vector vecStar
 	UTIL_SetOrigin( pChronoClip->pev, vecStart );
 	pChronoClip->pev->velocity = vecVelocity;
 	pChronoClip->pev->owner = ENT(pevOwner);
-	pChronoClip->SetTouch( BounceTouch );
+	pChronoClip->SetTouch( &CChronoClip::BounceTouch );
 	pChronoClip->pev->dmgtime = gpGlobals->time + time;
-	pChronoClip->SetThink( TumbleThink );
+	pChronoClip->SetThink( &CChronoClip::TumbleThink );
 	pChronoClip->pev->nextthink = gpGlobals->time + 0.1;
 	pChronoClip->pev->gravity = 1;
 	pChronoClip->pev->friction = 0.8;

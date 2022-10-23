@@ -39,7 +39,7 @@ void CNuke::Explode( TraceResult *pTrace, int bitsDamageType )
 	pev->effects |= EF_NODRAW;
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
-	SetThink( Irradiate );
+	SetThink( &CNuke::Irradiate );
 	pev->nextthink = gpGlobals->time + 0.3;
 }
 
@@ -117,7 +117,7 @@ CNuke *CNuke::ShootNuke( entvars_t *pevOwner, Vector vecStart, Vector vecVelocit
 	pNuke->pev->velocity = vecVelocity;
 	pNuke->pev->angles = UTIL_VecToAngles (pNuke->pev->velocity);
 	pNuke->pev->owner = ENT(pevOwner);
-	pNuke->SetTouch( ExplodeTouch );
+	pNuke->SetTouch( &CNuke::ExplodeTouch );
 	pNuke->pev->dmg = dmg_redeemer.value * (mp_wpn_power.value/100);
 	FX_Trail(pNuke->pev->origin, pNuke->entindex(), PROJ_NUKE );
 
@@ -132,12 +132,12 @@ CNuke *CNuke::ShootNuke( entvars_t *pevOwner, Vector vecStart, Vector vecVelocit
 		SET_VIEW( ENT(pevOwner), pNuke->edict() );
 		pNuke->pev->angles.x = -pNuke->pev->angles.x;
 
-		pNuke->SetThink ( IgniteFollow );
+		pNuke->SetThink ( &CNuke::IgniteFollow );
 		pNuke->pev->nextthink = 0.1;
 	}
 	else
 	{
-		pNuke->SetThink ( Ignite );
+		pNuke->SetThink ( &CNuke::Ignite );
 		pNuke->pev->nextthink = 0.1;
 	}
 	return pNuke;
@@ -151,7 +151,7 @@ void CNuke :: Ignite( void  )
 void CNuke :: IgniteFollow( void  )
 {
 	EMIT_SOUND( ENT(pev), CHAN_VOICE, "weapons/redeemer_WH_fly.wav", 1, ATTN_LOW_HIGH);
-	SetThink ( Follow );
+	SetThink ( &CNuke::Follow );
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 

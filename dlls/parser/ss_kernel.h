@@ -47,7 +47,9 @@ public:
 
 	Type Execute ()
 	{
-		return Type (fields.begin(), type, GenericFunction::argc);
+		// CrazyRussian: this stuff seems to be unimplemented, probably it is a good idea to replace it with LUA for example
+		//return Type (fields.begin(), type, GenericFunction::argc);
+		return Type();
 	};
 
 	bool Constant ( bool args_constant )

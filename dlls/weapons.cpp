@@ -517,8 +517,8 @@ void CBasePlayerItem :: FallInit( void )
 	UTIL_SetOrigin( pev, pev->origin );
 	UTIL_SetSize(pev, Vector( 0, 0, 0), Vector(0, 0, 0) );
 
-	SetTouch( DefaultTouch );
-	SetThink( FallThink );
+	SetTouch( &CBasePlayerItem::DefaultTouch );
+	SetThink( &CBasePlayerItem::FallThink );
 
 	pev->nextthink = gpGlobals->time + 0.1;
 }
@@ -557,7 +557,7 @@ void CBasePlayerItem::Materialize( void )
 	pev->solid = SOLID_TRIGGER;
 
 	UTIL_SetOrigin( pev, pev->origin );// link into world.
-	SetTouch (DefaultTouch);
+	SetTouch (&CBasePlayerItem::DefaultTouch);
 	SetThink (NULL);
 
 }
@@ -610,7 +610,7 @@ CBaseEntity* CBasePlayerItem::Respawn( void )
 	{
 		pNewWeapon->pev->effects |= EF_NODRAW;// invisible for now
 		pNewWeapon->SetTouch( NULL );// no touch
-		pNewWeapon->SetThink( AttemptToMaterialize );
+		pNewWeapon->SetThink( &CBasePlayerItem::AttemptToMaterialize );
 
 		DROP_TO_FLOOR ( ENT(pev) );
 
@@ -777,14 +777,14 @@ int CBasePlayerItem::AddToPlayer( CBasePlayer *pPlayer )
 void CBasePlayerItem::Drop( void )
 {
 	SetTouch( NULL );
-	SetThink(SUB_Remove);
+	SetThink(&CBaseEntity::SUB_Remove);
 	pev->nextthink = gpGlobals->time + .1;
 }
 
 void CBasePlayerItem::Kill( void )
 {
 	SetTouch( NULL );
-	SetThink(SUB_Remove);
+	SetThink(&CBaseEntity::SUB_Remove);
 	pev->nextthink = gpGlobals->time + .1;
 }
 
@@ -1052,7 +1052,7 @@ BOOL CBasePlayerWeapon :: DefaultReload( int iClipSize, int iAnim, float fDelay,
 
 	if ( m_iFiredAmmo >= I.iMaxClip )
 	{
-		SetThink ( ClipCasing );
+		SetThink ( &CBasePlayerWeapon::ClipCasing );
 		pev->nextthink = gpGlobals->time + fDrop;
 
 		m_iFiredAmmo = 0;
@@ -1074,37 +1074,37 @@ void CBasePlayerWeapon :: ClipCasing ( void )
 
 	if (pev->weapons == CLIP_AKIMBOGUN_SG552) //hack for Akimbogun
 	{
-		SetThink ( ClipCasingAug );
+		SetThink ( &CBasePlayerWeapon::ClipCasingAug );
 		pev->nextthink = gpGlobals->time + 2.8;
 	}
 	else if (pev->weapons == CLIP_UZI_RIGHT) //hack for Uzi
 	{
-		SetThink ( ClipCasingUzi );
+		SetThink ( &CBasePlayerWeapon::ClipCasingUzi );
 		pev->nextthink = gpGlobals->time + 3.5;
 	}
 	else if (pev->weapons == CLIP_NAILGUN)
 	{
-		SetThink ( ClipCasingNailgun );
+		SetThink ( &CBasePlayerWeapon::ClipCasingNailgun );
 		pev->nextthink = gpGlobals->time + 0.35;
 	}
 	else if (pev->weapons == CLIP_GLUONGUN)
 	{
-		SetThink ( ClipCasingGluongun );
+		SetThink ( &CBasePlayerWeapon::ClipCasingGluongun );
 		pev->nextthink = gpGlobals->time + 0.6;
 	}
 	else if (pev->weapons == CLIP_EGON)
 	{
-		SetThink ( ClipCasingEgon );
+		SetThink ( &CBasePlayerWeapon::ClipCasingEgon );
 		pev->nextthink = gpGlobals->time + 0.8;
 	}
 	else if (pev->weapons == CLIP_CHRONOSCEPTOR)
 	{
-		SetThink ( ClipCasingChronosceptor );
+		SetThink ( &CBasePlayerWeapon::ClipCasingChronosceptor );
 		pev->nextthink = gpGlobals->time + 1.2;
 	}
 	if (pev->weapons == CLIP_MACHINEGUN)
 	{
-		SetThink ( ClipCasingMachinegun );
+		SetThink ( &CBasePlayerWeapon::ClipCasingMachinegun );
 		pev->nextthink = gpGlobals->time + 2.8;
 	}
 }
@@ -1137,7 +1137,7 @@ void CBasePlayerWeapon :: ClipCasingGluongun ( void )
 void CBasePlayerWeapon :: ClipCasingEgon ( void )
 {
 	FX_BrassClip( m_pPlayer->GetGunPosition(), m_pPlayer->pev->v_angle, m_pPlayer->entindex(), CLIP_EGON_MIDDLE);
-	SetThink ( ClipCasingEgonLast );
+	SetThink ( &CBasePlayerWeapon::ClipCasingEgonLast );
 	pev->nextthink = gpGlobals->time + 0.8;
 }
 
@@ -1479,7 +1479,7 @@ void CWeaponBox::Kill( void )
 
 		while ( pWeapon )
 		{
-			pWeapon->SetThink(SUB_Remove);
+			pWeapon->SetThink(&CBaseEntity::SUB_Remove);
 			pWeapon->pev->nextthink = gpGlobals->time + 0.1;
 			pWeapon = pWeapon->m_pNext;
 		}

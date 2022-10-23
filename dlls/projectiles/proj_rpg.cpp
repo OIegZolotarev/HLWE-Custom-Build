@@ -87,12 +87,12 @@ CRpgRocket *CRpgRocket::ShootRpgRocket( entvars_t *pevOwner, Vector vecStart, Ve
 		pRpgRocket->m_pLauncher->m_cActiveRockets++;
 
 	if (LaserFollow)
-		pRpgRocket->SetThink ( IgniteFollow );
+		pRpgRocket->SetThink ( &CRpgRocket::IgniteFollow );
 	else
-		pRpgRocket->SetThink ( Ignite );
+		pRpgRocket->SetThink ( &CRpgRocket::Ignite );
 
 	pRpgRocket->pev->nextthink = 0.1;
-	pRpgRocket->SetTouch( ExplodeTouch );
+	pRpgRocket->SetTouch( &CRpgRocket::ExplodeTouch );
 	pRpgRocket->pev->dmg = dmg_rpg.value * (mp_wpn_power.value/100);
 	return pRpgRocket;
 }
@@ -106,7 +106,7 @@ void CRpgRocket:: IgniteFollow( void  )
 {
 	m_flIgniteTime = gpGlobals->time;
 	EMIT_SOUND( ENT(pev), CHAN_ITEM, "weapons/rocket1.wav", 1, ATTN_LOW_HIGH);
-	SetThink ( Follow );
+	SetThink ( &CRpgRocket::Follow );
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 

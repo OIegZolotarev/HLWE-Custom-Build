@@ -67,8 +67,8 @@ void CRat :: Spawn( void )
 	UTIL_SetSize(pev, Vector( -6, -6, 0), Vector(6, 6, 10));
 	UTIL_SetOrigin( pev, pev->origin );
 
-	SetTouch( SuperBounceTouch );
-	SetThink( HuntThink );
+	SetTouch( &CRat::SuperBounceTouch );
+	SetThink( &CRat::HuntThink );
 	pev->nextthink = gpGlobals->time + 0.1;
 	m_flNextHunt = gpGlobals->time + 1E6;
 
@@ -103,7 +103,7 @@ void CRat :: Killed( entvars_t *pevAttacker, int iGib )
 	FX_Trail( pev->origin, entindex(), PROJ_GUTS_DETONATE );
 
 	pev->model = iStringNull;
-	SetThink( SUB_Remove );
+	SetThink( &CBaseEntity::SUB_Remove );
 	SetTouch( NULL );
 	pev->nextthink = gpGlobals->time + 0.1;
 	pev->takedamage = DAMAGE_NO;

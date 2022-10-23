@@ -67,7 +67,7 @@ CTeslagren *CTeslagren::ShootTeslagren( entvars_t *pevOwner, Vector vecStart, Ve
 	pTeslagren->pev->angles = UTIL_VecToAngles (pTeslagren->pev->velocity);
 	pTeslagren->pev->owner = ENT(pevOwner);
 	pTeslagren->pev->nextthink = gpGlobals->time;
-	pTeslagren->SetTouch( ExplodeTouch );
+	pTeslagren->SetTouch( &CTeslagren::ExplodeTouch );
 	pTeslagren->pev->dmg = dmg_tesla_grenade.value * (mp_wpn_power.value/100);
 	FX_Trail(pTeslagren->pev->origin, pTeslagren->entindex(), PROJ_TESLAGREN );
 	return pTeslagren;

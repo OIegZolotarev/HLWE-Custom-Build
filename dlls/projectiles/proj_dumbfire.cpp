@@ -66,9 +66,9 @@ CDumbfire *CDumbfire::ShootDumbfire( entvars_t *pevOwner, Vector vecStart, Vecto
 	pDumbfire->pev->velocity = vecVelocity;
 	pDumbfire->pev->angles = UTIL_VecToAngles (pDumbfire->pev->velocity);
 	pDumbfire->pev->owner = ENT(pevOwner);
-	pDumbfire->SetThink ( Follow );
+	pDumbfire->SetThink ( &CDumbfire::Follow );
 	pDumbfire->pev->nextthink = 0.1;
-	pDumbfire->SetTouch( ExplodeTouch );
+	pDumbfire->SetTouch( &CDumbfire::ExplodeTouch );
 	pDumbfire->pev->dmg = dmg_dumbfire_missile.value * (mp_wpn_power.value/100);
 	pDumbfire->pev->avelocity.z = -300;
 

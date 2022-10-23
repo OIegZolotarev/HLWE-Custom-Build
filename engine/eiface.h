@@ -379,6 +379,10 @@ typedef struct
 	short			flags;
 } TYPEDESCRIPTION;
 
+// CrazyRussian
+#undef ARRAYSIZE // Make compiler happy
+// CrazyRussian
+
 #define ARRAYSIZE(p)		(sizeof(p)/sizeof(p[0]))
 
 typedef struct 

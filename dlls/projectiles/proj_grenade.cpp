@@ -79,7 +79,7 @@ void CGrenade :: TumbleThink( void )
 
 	if (pev->dmgtime <= gpGlobals->time)
 	{
-		SetThink( Detonate );
+		SetThink( &CGrenade::Detonate );
 	}
 	if (pev->waterlevel != 0)
 	{
@@ -111,9 +111,9 @@ CGrenade * CGrenade:: ShootGrenade( entvars_t *pevOwner, Vector vecStart, Vector
 	pGrenade->pev->velocity = vecVelocity;
 	pGrenade->pev->angles = UTIL_VecToAngles(pGrenade->pev->velocity);
 	pGrenade->pev->owner = ENT(pevOwner);
-	pGrenade->SetTouch( BounceTouch );
+	pGrenade->SetTouch( &CGrenade::BounceTouch );
 	pGrenade->pev->dmgtime = gpGlobals->time + time;
-	pGrenade->SetThink( TumbleThink );
+	pGrenade->SetThink( &CGrenade::TumbleThink );
 	pGrenade->pev->nextthink = gpGlobals->time + 0.1;
 return pGrenade;
 }

@@ -1427,7 +1427,9 @@ Type Initializer::execute()
 
 	build = std::for_each (elements->begin(), elements->end(), build);
 
-	return Type (build.buff.begin(), ARRAY, build.buff.size());
+	// CrazyRussian
+	//return Type (build.buff.begin(), ARRAY, build.buff.size());
+	return Type();
 }
 
 

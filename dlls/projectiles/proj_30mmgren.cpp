@@ -66,7 +66,7 @@ C30mmgren *C30mmgren::Shoot30mmgren( entvars_t *pevOwner, Vector vecStart, Vecto
 	p30mmgren->pev->gravity = 0.3;
 	p30mmgren->pev->owner = ENT(pevOwner);
 	p30mmgren->pev->nextthink = gpGlobals->time;
-	p30mmgren->SetTouch( ExplodeTouch );
+	p30mmgren->SetTouch( &C30mmgren::ExplodeTouch );
 	p30mmgren->pev->dmg = dmg_30mmgren.value * (mp_wpn_power.value/100);
 	FX_Trail(p30mmgren->pev->origin, p30mmgren->entindex(), PROJ_30MMGREN );
 

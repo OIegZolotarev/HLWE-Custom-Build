@@ -67,7 +67,7 @@ void Cc4::Holster( )
 	else
 	{
 		m_pPlayer->m_iWeapons2 &= ~(1<<(WEAPON_C4 - 32));
-		SetThink( DestroyItem );
+		SetThink( &CBasePlayerItem::DestroyItem );
 		pev->nextthink = gpGlobals->time + 0.1;
 	}
 }

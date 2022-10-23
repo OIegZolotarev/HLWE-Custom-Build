@@ -74,7 +74,7 @@ CU2Baby *CU2Baby::ShootU2Baby( entvars_t *pevOwner, Vector vecStart, Vector vecV
 	pU2Baby->pev->velocity = vecVelocity;
 	pU2Baby->pev->angles = UTIL_VecToAngles (pU2Baby->pev->velocity);
 	pU2Baby->pev->owner = ENT(pevOwner);
-	pU2Baby->SetTouch( ExplodeTouch );
+	pU2Baby->SetTouch( &CU2Baby::ExplodeTouch );
 	pU2Baby->pev->dmg = dmg_u2shard.value * (mp_wpn_power.value/100);
 	FX_Trail(pU2Baby->pev->origin, pU2Baby->entindex(), PROJ_U2_SHARD );
 	return pU2Baby;

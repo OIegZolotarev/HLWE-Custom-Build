@@ -71,7 +71,7 @@ CMmissile *CMmissile::ShootMmissile( entvars_t *pevOwner, Vector vecStart, Vecto
 	pMmissile->pev->velocity = vecVelocity;
 	pMmissile->pev->angles = UTIL_VecToAngles (pMmissile->pev->velocity);
 	pMmissile->pev->owner = ENT(pevOwner);
-	pMmissile->SetTouch( ExplodeTouch );
+	pMmissile->SetTouch( &CMmissile::ExplodeTouch );
 	pMmissile->pev->dmg = dmg_devastator.value * (mp_wpn_power.value/100);
 	FX_Trail(pMmissile->pev->origin, pMmissile->entindex(), PROJ_MMISSILE );
 	return pMmissile;

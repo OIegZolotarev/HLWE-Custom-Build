@@ -39,7 +39,7 @@ void CPBolt::ExplodeTouch( CBaseEntity *pOther )
 	pev->velocity = g_vecZero;
 	SetTouch(NULL);
 
-	SetThink( Nova );
+	SetThink( &CPBolt::Nova );
 	pev->nextthink = gpGlobals->time + 0.9;
 }
 
@@ -48,7 +48,7 @@ void CPBolt::Nova( void )
 	entvars_t *pevOwner = VARS( pev->owner );
 	::RadiusDamage( pev->origin, pev, pevOwner, pev->dmg, pev->dmg*3, CLASS_NONE, DMG_SONIC);
 	FX_Explosion( pev->origin, EXPLOSION_PBOLT);
-	SetThink(SUB_Remove);
+	SetThink(&CBaseEntity::SUB_Remove);
 }
 
 void CPBolt:: Spawn( void )
@@ -74,8 +74,8 @@ CPBolt *CPBolt::ShootPBolt( entvars_t *pevOwner, Vector vecStart, Vector vecVelo
 	pPBolt->pev->velocity = vecVelocity;
 	pPBolt->pev->angles = UTIL_VecToAngles (pPBolt->pev->velocity);
 	pPBolt->pev->owner = ENT(pevOwner);
-	pPBolt->SetTouch( ExplodeTouch );
-	pPBolt->SetThink ( Fly );
+	pPBolt->SetTouch( &CPBolt::ExplodeTouch );
+	pPBolt->SetThink ( &CPBolt::Fly );
 	pPBolt->pev->nextthink = 0.001;
 	pPBolt->pev->dmg = dmg_lightsaber_pistol.value * (mp_wpn_power.value/100);
 	return pPBolt;

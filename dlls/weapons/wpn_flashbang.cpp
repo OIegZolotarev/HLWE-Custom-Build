@@ -95,7 +95,7 @@ void CFlashbang::Holster( )
 	else
 	{
 		m_pPlayer->m_iWeapons2 &= ~(1<<(WEAPON_FLASHBANG - 32));
-		SetThink( DestroyItem );
+		SetThink( &CBasePlayerItem::DestroyItem );
 		pev->nextthink = gpGlobals->time + 0.1;
 	}
 }

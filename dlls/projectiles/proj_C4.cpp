@@ -79,7 +79,7 @@ void CDetpack::BounceTouch( CBaseEntity *pOther )
 void CDetpack :: BeepThink( void )
 {
 	if (pev->dmgtime <= gpGlobals->time)
-		SetThink( Detonate );
+		SetThink( &CDetpack::Detonate );
 
 	if ( gpGlobals->time >= m_flSoundTime )
 	{
@@ -117,8 +117,8 @@ CDetpack * CDetpack:: ShootTimedDetpack( entvars_t *pevOwner, Vector vecStart, V
 	pDetpack->pev->velocity = vecVelocity;
 	pDetpack->pev->enemy = ENT(pevOwner);
 	
-	pDetpack->SetTouch( BounceTouch );	
-	pDetpack->SetThink( BeepThink );
+	pDetpack->SetTouch( &CDetpack::BounceTouch );	
+	pDetpack->SetThink( &CDetpack::BeepThink );
 	pDetpack->pev->nextthink = gpGlobals->time + 0.1;
 	pDetpack->pev->dmg = dmg_c4.value * (mp_wpn_power.value/100);
 	return pDetpack;

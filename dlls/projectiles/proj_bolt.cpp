@@ -20,7 +20,7 @@ void CBolt::ExplodeTouch( CBaseEntity *pOther )
 	{
 		pev->movetype = MOVETYPE_FLY;
 		pev->velocity = g_vecZero;
-		SetThink(SUB_Remove);
+		SetThink(&CBaseEntity::SUB_Remove);
 		pev->nextthink = gpGlobals->time + 15;
 		return;
 	}
@@ -73,7 +73,7 @@ void CBolt::ExplodeTouch( CBaseEntity *pOther )
 			EMIT_SOUND(ENT(pev), CHAN_VOICE, "weapons/xbow_hit1.wav", 1, ATTN_NORM);
 			pev->movetype = MOVETYPE_FLY;
 			pev->velocity = g_vecZero;
-			SetThink(SUB_Remove);
+			SetThink(&CBaseEntity::SUB_Remove);
 			pev->nextthink = gpGlobals->time + 15;
 		}
 		else if ( pOther->pev->solid == SOLID_BSP)
@@ -81,7 +81,7 @@ void CBolt::ExplodeTouch( CBaseEntity *pOther )
 			EMIT_SOUND(ENT(pev), CHAN_VOICE, "weapons/xbow_hit1.wav", 1, ATTN_NORM);
 			pev->movetype = MOVETYPE_FLY;
 			pev->velocity = g_vecZero;
-			SetThink(SUB_Remove);
+			SetThink(&CBaseEntity::SUB_Remove);
 			pev->nextthink = gpGlobals->time + 15;
 		}
 	}
@@ -107,7 +107,7 @@ CBolt *CBolt::ShootBolt( entvars_t *pevOwner, Vector vecStart, Vector vecVelocit
 	pBolt->pev->angles = UTIL_VecToAngles (pBolt->pev->velocity);
 	pBolt->pev->owner = ENT(pevOwner);
 	pBolt->pev->nextthink = gpGlobals->time;
-	pBolt->SetTouch( ExplodeTouch );
+	pBolt->SetTouch( &CBolt::ExplodeTouch );
 	pBolt->pev->frags = type;
 
 	if (type == 2)

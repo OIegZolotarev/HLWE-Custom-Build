@@ -80,7 +80,7 @@ void CU2Momma :: TumbleThink( void )
 	pev->nextthink = gpGlobals->time + 0.1;
 
 	if (pev->dmgtime <= gpGlobals->time)
-		SetThink( ShootShards );
+		SetThink( &CU2Momma::ShootShards );
 }
 
 CU2Momma * CU2Momma:: ShootU2Momma( entvars_t *pevOwner, Vector vecStart, Vector vecVelocity, float time )
@@ -91,9 +91,9 @@ CU2Momma * CU2Momma:: ShootU2Momma( entvars_t *pevOwner, Vector vecStart, Vector
 	pU2Momma->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-20,20) + gpGlobals->v_up * RANDOM_FLOAT(-20,20);
 	pU2Momma->pev->angles = UTIL_VecToAngles(pU2Momma->pev->velocity);
 	pU2Momma->pev->owner = ENT(pevOwner); 
-	pU2Momma->SetTouch( ExplodeTouch ); 
+	pU2Momma->SetTouch( &CU2Momma::ExplodeTouch ); 
 	pU2Momma->pev->dmgtime = gpGlobals->time + time;
-	pU2Momma->SetThink( TumbleThink );
+	pU2Momma->SetThink( &CU2Momma::TumbleThink );
 	pU2Momma->pev->nextthink = gpGlobals->time + 0.1;
 	pU2Momma->pev->dmg = dmg_u2main.value * (mp_wpn_power.value/100);
 	FX_Trail(pU2Momma->pev->origin, pU2Momma->entindex(), PROJ_U2 );

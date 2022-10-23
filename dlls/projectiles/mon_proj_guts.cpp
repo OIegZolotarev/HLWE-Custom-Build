@@ -75,7 +75,7 @@ CGuts *CGuts::ShootGuts( entvars_t *pevOwner, Vector vecStart, Vector vecVelocit
 	pGuts->pev->velocity = vecVelocity;
 	pGuts->pev->angles = UTIL_VecToAngles (pGuts->pev->velocity);
 	pGuts->pev->owner = ENT(pevOwner);
-	pGuts->SetTouch( ExplodeTouch );
+	pGuts->SetTouch( &CGuts::ExplodeTouch );
 	pGuts->pev->dmg = zombie_dmg_range.value;
 	pGuts->pev->avelocity.y = RANDOM_FLOAT (-200, -500);
 	FX_Trail(pGuts->pev->origin, pGuts->entindex(), PROJ_GUTS );

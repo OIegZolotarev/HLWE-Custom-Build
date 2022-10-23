@@ -613,7 +613,7 @@ void CFuncMachinegun::Killed(entvars_t *pevAttacker, int iGib)
 	pev->nextthink = gpGlobals->time + 45;//45 seconds till respawn
 	pev->effects = EF_NODRAW;
 	UTIL_SetSize(pev, g_vecZero, g_vecZero);
-	SetThink (CheckSpawn); 
+	SetThink (&CFuncMachinegun::CheckSpawn); 
 }
 
 void CFuncMachinegun::TraceAttack( entvars_t *pevAttacker, float flDamage, Vector vecDir, TraceResult *ptr, int bitsDamageType)

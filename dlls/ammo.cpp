@@ -16,7 +16,7 @@ void CBasePlayerAmmo::Spawn(void)
 	pev->solid = SOLID_TRIGGER;
 	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 16));
 	UTIL_SetOrigin(pev, pev->origin);
-	SetTouch(DefaultTouch);
+	SetTouch(&CBasePlayerAmmo::DefaultTouch);
 }
 
 CBaseEntity* CBasePlayerAmmo::Respawn(void)
@@ -24,7 +24,7 @@ CBaseEntity* CBasePlayerAmmo::Respawn(void)
 	pev->effects |= EF_NODRAW;
 	SetTouch(NULL);
 	UTIL_SetOrigin(pev, g_pGameRules->VecAmmoRespawnSpot(this));// move to wherever I'm supposed to repawn.
-	SetThink(Materialize);
+	SetThink(&CBasePlayerAmmo::Materialize);
 	pev->nextthink = g_pGameRules->FlAmmoRespawnTime(this);
 	return this;
 }
@@ -38,7 +38,7 @@ void CBasePlayerAmmo::Materialize(void)
 		pev->effects &= ~EF_NODRAW;
 		pev->effects |= EF_MUZZLEFLASH;
 	}
-	SetTouch(DefaultTouch);
+	SetTouch(&CBasePlayerAmmo::DefaultTouch);
 }
 
 void CBasePlayerAmmo::DefaultTouch(CBaseEntity *pOther)
@@ -55,7 +55,7 @@ void CBasePlayerAmmo::DefaultTouch(CBaseEntity *pOther)
 		else
 		{
 			SetTouch(NULL);
-			SetThink(SUB_Remove);
+			SetThink(&CBaseEntity::SUB_Remove);
 			pev->nextthink = gpGlobals->time + .1;
 		}
 	}

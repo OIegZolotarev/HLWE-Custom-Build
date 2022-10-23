@@ -83,7 +83,10 @@ void CEnergycharge::BlastOn ( void )
 	m_pNoise->SetNoise( 65 );
 	m_pNoise->SetFlags( BEAM_FSHADEOUT );
 	m_pNoise->SetColor( 255, 255, 173 );
-	EXPORT RelinkBeam();
+	
+	// CrazyRussian - not sure
+	// EXPORT RelinkBeam();
+
 }
 
 void CEnergycharge::BlastOff ( void )
@@ -115,7 +118,7 @@ CEnergycharge *CEnergycharge::ShootEnergycharge( entvars_t *pevOwner, Vector vec
 	pEnergycharge->pev->angles = UTIL_VecToAngles (pEnergycharge->pev->velocity);
 	pEnergycharge->pev->owner = ENT(pevOwner);
 	pEnergycharge->pev->nextthink = gpGlobals->time;
-	pEnergycharge->SetTouch( ExplodeTouch );
+	pEnergycharge->SetTouch( &CEnergycharge::ExplodeTouch );
 	pEnergycharge->pev->dmg = 50;
 	return pEnergycharge;
 }

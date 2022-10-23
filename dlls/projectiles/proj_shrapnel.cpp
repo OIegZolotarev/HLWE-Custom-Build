@@ -16,7 +16,7 @@ void CShrapnel::Spawn( void )
 	pLauncher = NULL;
 	pev->movetype = MOVETYPE_BOUNCEMISSILE;
 	pev->solid = SOLID_BBOX;
-	SetTouch( ShrapnelTouch );
+	SetTouch( &CShrapnel::ShrapnelTouch );
 
 	pev->dmg = dmg_flak_shrapnel.value * (mp_wpn_power.value/100); 
 	pev->classname = MAKE_STRING("flak_shard");
@@ -30,12 +30,12 @@ void CShrapnel::Spawn( void )
 
 	// Safety removal
 	pev->nextthink = gpGlobals->time + 0.1;
-	SetThink( ShrapnelThink );
+	SetThink( &CShrapnel::ShrapnelThink );
 }
 
 void CShrapnel::ShrapnelThink ( void )
 {
-	SetThink (SUB_Remove);
+	SetThink (&CBaseEntity::SUB_Remove);
 	pev->nextthink = gpGlobals->time + 4.9f;
 	pev->owner = NULL;
 }

@@ -67,9 +67,9 @@ CFrostball *CFrostball::ShootFrostball( entvars_t *pevOwner, Vector vecStart, Ve
 	pFrostball->pev->velocity = vecVelocity + gpGlobals->v_right * RANDOM_FLOAT(-50,50) + gpGlobals->v_up * RANDOM_FLOAT(-50,50);
 	pFrostball->pev->angles = UTIL_VecToAngles(pFrostball->pev->velocity);
 	pFrostball->pev->owner = ENT(pevOwner);
-	pFrostball->SetTouch( ExplodeTouch );
+	pFrostball->SetTouch( &CFrostball::ExplodeTouch );
 	pFrostball->pev->dmg = dmg_froster.value * (mp_wpn_power.value/100);
-	pFrostball->SetThink ( Fly );
+	pFrostball->SetThink ( &CFrostball::Fly );
 	pFrostball->pev->nextthink = 0.1;
 	FX_Trail(pFrostball->pev->origin, pFrostball->entindex(), PROJ_ICE );
 	return pFrostball;

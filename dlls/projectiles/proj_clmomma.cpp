@@ -42,7 +42,7 @@ void CClMomma::BounceTouch( CBaseEntity *pOther )
 		ClearMultiDamage( );
 		pOther->TraceAttack(pevOwner, pev->dmg/3.5, gpGlobals->v_forward, &tr, DMG_BULLETMAGNUM ); 
 		ApplyMultiDamage( pev, pevOwner);
-		SetThink( Detonate );
+		SetThink( &CClMomma::Detonate );
 		return;
 	}
 
@@ -65,7 +65,7 @@ void CClMomma :: TumbleThink( void )
 
 	if (pev->dmgtime <= gpGlobals->time)
 	{
-		SetThink( Detonate );
+		SetThink( &CClMomma::Detonate );
 	}
 }
 
@@ -88,9 +88,9 @@ CClMomma * CClMomma:: ShootClusterMomma( entvars_t *pevOwner, Vector vecStart, V
 	pClMomma->pev->velocity = vecVelocity;
 	pClMomma->pev->angles = UTIL_VecToAngles(pClMomma->pev->velocity);
 	pClMomma->pev->owner = ENT(pevOwner); 
-	pClMomma->SetTouch( BounceTouch ); 
+	pClMomma->SetTouch( &CClMomma::BounceTouch ); 
 	pClMomma->pev->dmgtime = gpGlobals->time + time;
-	pClMomma->SetThink( TumbleThink );
+	pClMomma->SetThink( &CClMomma::TumbleThink );
 	pClMomma->pev->nextthink = gpGlobals->time + 0.1;
 	pClMomma->pev->gravity = 2;
 	pClMomma->pev->friction = 0.7;

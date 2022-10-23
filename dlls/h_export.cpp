@@ -92,6 +92,8 @@ void DLLEXPORT GiveFnptrsToDll(	enginefuncs_t* pengfuncsFromEngine, globalvars_t
 	memcpy(&g_engfuncs, pengfuncsFromEngine, sizeof(enginefuncs_t));
 	gpGlobals = pGlobals;
 
+
+
 /*
 	pSet = g_engfuncs.pfnSetModel;
 	pSnd = g_engfuncs.pfnPrecacheSound;

@@ -925,7 +925,7 @@ void CBasePlayer::PackDeadPlayerItems(void)
 	CWeaponBox *pWeaponBox = (CWeaponBox *)CBaseEntity::Create( "weaponbox", pev->origin, pev->angles, edict() );
 	pWeaponBox->pev->angles.x = 0;// don't let weaponbox tilt.
 	pWeaponBox->pev->angles.z = 0;
-	pWeaponBox->SetThink( CWeaponBox::Kill );
+	pWeaponBox->SetThink( &CWeaponBox::Kill );
 
 	if (m_fAnnihilated)
 		pWeaponBox->pev->nextthink = gpGlobals->time;
@@ -1116,7 +1116,7 @@ void CBasePlayer::Killed( entvars_t *pevAttacker, int iGib )
 	pev->velocity = g_vecZero;
 	pev->avelocity = g_vecZero;
 
-	SetThink(PlayerDeathThink);
+	SetThink(&CBasePlayer::PlayerDeathThink);
 
 	if (FlashlightIsOn())
 	FlashlightTurnOff();
@@ -2009,7 +2009,7 @@ void CBasePlayer::CheckTimeBasedDamage()
 	static float gtbdPrev = 0.0;
 
 	// only check for time based damage approx. every 2 seconds
-	if (abs(gpGlobals->time - m_tbdPrev) < 0.5)
+	if (fabs(gpGlobals->time - m_tbdPrev) < 0.5)
 		return;
 
 	m_tbdPrev = gpGlobals->time;//LLAPb: moved here, to keep buyzone updating
@@ -3159,7 +3159,7 @@ void CBloodSplat::Spawn ( entvars_t *pevOwner )
 	pev->angles = pevOwner->v_angle;
 	pev->owner = ENT(pevOwner);
 
-	SetThink ( Spray );
+	SetThink ( &CBloodSplat::Spray );
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 
@@ -3169,7 +3169,7 @@ void CBloodSplat::Spray ( void )
 	UTIL_MakeVectors(pev->angles);
 	UTIL_TraceLine ( pev->origin, pev->origin + gpGlobals->v_forward * 128, ignore_monsters, pev->owner, & tr);
 	UTIL_BloodDecalTrace(&tr);
-	SetThink ( SUB_Remove );
+	SetThink ( &CBaseEntity::SUB_Remove );
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 
@@ -4504,7 +4504,7 @@ void CBasePlayer::SellCurrentWeapon ( )
 		else
 			m_iWeapons2 &= ~(1<<(pWeapon->m_iId - 32));// take item off hud
 
-		pGun->SetThink( CBasePlayerItem::DestroyItem );
+		pGun->SetThink( &CBasePlayerItem::DestroyItem );
 		pGun->pev->nextthink = gpGlobals->time;
 	}
 }
@@ -4741,7 +4741,7 @@ void CRevertSaved :: RealUse( CBaseEntity *pActivator, CBaseEntity *pCaller, USE
 {
 	UTIL_ScreenFadeAll( pev->rendercolor, Duration(), HoldTime(), pev->renderamt, FFADE_OUT );
 	pev->nextthink = gpGlobals->time + MessageTime();
-	SetThink( MessageThink );
+	SetThink( &CRevertSaved::MessageThink );
 }
 
 
@@ -4752,7 +4752,7 @@ void CRevertSaved :: MessageThink( void )
 	if ( nextThink > 0 ) 
 	{
 		pev->nextthink = gpGlobals->time + nextThink;
-		SetThink( LoadThink );
+		SetThink( &CRevertSaved::LoadThink );
 	}
 	else
 		LoadThink();

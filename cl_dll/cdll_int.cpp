@@ -143,7 +143,7 @@ int DLLEXPORT Initialize( cl_enginefunc_t *pEnginefuncs, int iVersion )
 	memcpy(&gEngfuncs, pEnginefuncs, sizeof(cl_enginefunc_t));
 
 	// CrazyRussian
-	gEngfuncs.Con_Printf("Test-test-test\n");
+	//gEngfuncs.Con_Printf("Test-test-test\n");
 	// CrazyRussian
 
 	return 1;
