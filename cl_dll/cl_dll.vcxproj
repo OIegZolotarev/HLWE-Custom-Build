@@ -71,6 +71,7 @@
       <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <SmallerTypeCheck>true</SmallerTypeCheck>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -103,7 +104,7 @@ hl.exe -game hl15we
 </Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>echo y | copy "$(Projectdir)..\bin\cl_dll.dll" "D:\Games\Steam\steamapps\common\Half-Life\hl15we\cl_dlls\client.dll"</Command>
+      <Command>echo y | copy "$(Projectdir)..\bin\cl_dll.dll" "E:\Projects\PC\H.L.A.M. DX Edition\Xash3D\xash_build4344\hl15we\cl_dlls\client.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,7 +153,7 @@ hl.exe -game hl15we
       </Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>echo y | copy "$(Projectdir)..\bin\cl_dll.dll" "D:\Games\Steam\steamapps\common\Half-Life\hl15we\cl_dlls\client.dll"</Command>
+      <Command>echo y | copy "$(Projectdir)..\bin\cl_dll.dll" "E:\Projects\PC\H.L.A.M. DX Edition\Xash3D\xash_build4344\hl15we\cl_dlls\client.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

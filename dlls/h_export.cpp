@@ -24,6 +24,7 @@
 #include "util.h"
 
 #include "cbase.h"
+#include <crtdbg.h>
 
 // Holds engine functionality callbacks
 enginefuncs_t g_engfuncs;
@@ -92,7 +93,8 @@ void DLLEXPORT GiveFnptrsToDll(	enginefuncs_t* pengfuncsFromEngine, globalvars_t
 	memcpy(&g_engfuncs, pengfuncsFromEngine, sizeof(enginefuncs_t));
 	gpGlobals = pGlobals;
 
-
+	// CrazyRussian debug
+	_CrtSetDbgFlag(_CRTDBG_CHECK_ALWAYS_DF);
 
 /*
 	pSet = g_engfuncs.pfnSetModel;

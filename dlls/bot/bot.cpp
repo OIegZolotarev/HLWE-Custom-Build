@@ -25,7 +25,7 @@ extern int gmsgSetFOV;
 
 #define PLAYER_SEARCH_RADIUS (float)40
 
-int f_botskill = 3;  // default bot skill level
+int f_botskill = 1;  // default bot skill level
 int f_botdontshoot = 0;
 
 // array of bot respawn information

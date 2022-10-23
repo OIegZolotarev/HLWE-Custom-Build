@@ -264,9 +264,7 @@ void DLLEXPORT HUD_Frame( double time )
 	if (g_iSprIndError <= 0)// XDM
 		PrecacheModels();
 
-	// XDM3035: this works well even in steam versions
-	if (g_pRenderManager && gHUD.m_iIntermission == 0)// XDM: call this AFTER gHUD.Redraw()!
-		g_pRenderManager->Update(gEngfuncs.GetClientTime(), time);
+	
 
 	ServersThink( time );
 	GetClientVoiceMgr()->Frame(time);

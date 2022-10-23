@@ -1875,9 +1875,79 @@ void CHalfLifeMultiplay :: PlayerSpawn( CBasePlayer *pPlayer )
 
 	if (addDefault)
 	{
-		pPlayer->GiveNamedItem( "weapon_flashbang" );
-		pPlayer->GiveNamedItem( "weapon_crowbar" );
-		pPlayer->GiveNamedItem( "weapon_glock" );
+		pPlayer->GiveNamedItem("weapon_flashbang");
+		pPlayer->GiveNamedItem("weapon_crowbar");
+		pPlayer->GiveNamedItem("weapon_glock");
+
+		// CrazyRussian: debug
+
+		char* randomItems[] = {"weapon_medkit",
+			"weapon_crowbar",
+			"weapon_bandsaw",
+			"weapon_torch",
+			"weapon_lightsaber",
+			"weapon_glock",
+			"weapon_usp",
+			"weapon_deagle",
+			"weapon_python",
+			"weapon_uzi",
+			"weapon_shieldgun",
+			"weapon_shotgun",
+			"weapon_autoshotgun",
+			"weapon_30mmsg",
+			"weapon_mp5",
+			"weapon_m16",
+			"weapon_akimbogun",
+			"weapon_ak74",
+			"weapon_g11",
+			"weapon_u2",
+			"weapon_crossbow",
+			"weapon_svd",
+			"weapon_awp",
+			"weapon_barett",
+			"weapon_m249",
+			"weapon_minigun",
+			"weapon_nailgun",
+			"weapon_froster",
+			"weapon_flamethrower",
+			"weapon_machinegun",
+			"weapon_flakcannon",
+			"weapon_bfg",
+			"weapon_rpg",
+			"weapon_incendiary",
+			"weapon_whl",
+			"weapon_devastator",
+			"weapon_redeemer",
+			"weapon_smartgun",
+			"weapon_teslagun",
+			"weapon_egon",
+			"weapon_plasmarifle",
+			"weapon_photongun",
+			"weapon_gauss",
+			"weapon_taucannon",
+			"weapon_gluongun",
+			"weapon_displacer",
+			"weapon_flashbang",
+			"weapon_handgrenade",
+			"weapon_tripmine",
+			"weapon_satchel",
+			"weapon_c4",
+			"weapon_blaster",
+			"weapon_biorifle",
+			"weapon_pulserifle",
+			"weapon_m72",
+			"weapon_satellite",
+			"weapon_turretkit",
+			"weapon_chronosceptor"
+	};
+
+		size_t nItems = ARRAYSIZE(randomItems);
+
+		pPlayer->GiveNamedItem(randomItems[RANDOM_LONG(0,nItems)]);
+		//pPlayer->Buy
+		// CrazyRussian
+
+		
 	}
 }
 

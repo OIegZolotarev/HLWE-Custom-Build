@@ -10,6 +10,9 @@ extern void respawn(entvars_t *pev, BOOL fCopyCorpse);
 
 void CBasePlayer::StartObserver( Vector vecPosition, Vector vecViewAngle )
 {
+	// CrazyRussian: debug for now?
+	return;
+
 	m_iHideHUD |= (HIDEHUD_HEALTH | HIDEHUD_WEAPONS);
 	m_afPhysicsFlags |= PFLAG_OBSERVER;
 

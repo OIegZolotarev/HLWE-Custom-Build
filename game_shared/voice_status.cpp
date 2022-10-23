@@ -806,6 +806,8 @@ void CVoiceStatus::FreeBitmaps()
 	// Clear references to the images in panels.
 	for(int i=0; i < VOICE_MAX_PLAYERS; i++)
 	{
+		// TODO: crashes here
+
 		if (m_pBanButtons[i])
 		{
 			m_pBanButtons[i]->setImage(NULL);

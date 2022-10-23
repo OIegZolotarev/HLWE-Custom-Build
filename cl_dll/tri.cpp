@@ -306,4 +306,9 @@ void DLLEXPORT HUD_DrawTransparentTriangles( void )
 	ProcessRain();
 	DrawRain();
 	DrawFXObjects();
+
+	// CrazyRussian: наху€, а главное зачем в HUD_Frame?
+	// XDM3035: this works well even in steam versions
+	if (g_pRenderManager && gHUD.m_iIntermission == 0)// XDM: call this AFTER gHUD.Redraw()!
+		g_pRenderManager->Update(gEngfuncs.GetClientTime(), gHUD.m_flTime);
 }

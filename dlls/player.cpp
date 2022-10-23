@@ -1490,15 +1490,19 @@ void CBasePlayer::PlayerDeathThink(void)
 		return;
 	}
 	
-	if (!fAnyButtonDown && !( g_pGameRules->IsMultiplayer() && (gpGlobals->time > (m_fDeadTime + 3))) )
+	// CrazyRussian: debug
+	//if (!fAnyButtonDown && !( g_pGameRules->IsMultiplayer() && (gpGlobals->time > (m_fDeadTime + 3))) )
+	if (!fAnyButtonDown && !(g_pGameRules->IsMultiplayer()))
 		return;
 
 	pev->button = 0;
 	m_iRespawnFrames = 0;
 	StopAnimation();
 
-	if (gpGlobals->time < (m_fDeadTime + mp_deadtime.value) || (m_afPhysicsFlags & PFLAG_OBSERVER))
-	return;
+	// CrazyRussian: debug
+// 	if (gpGlobals->time < (m_fDeadTime + mp_deadtime.value) || (m_afPhysicsFlags & PFLAG_OBSERVER))
+	if (m_afPhysicsFlags & PFLAG_OBSERVER)
+ 	return;
 
 	respawn(pev, !(m_afPhysicsFlags & PFLAG_OBSERVER) );// don't copy a corpse if we're in deathcam.
 	pev->nextthink = -1;

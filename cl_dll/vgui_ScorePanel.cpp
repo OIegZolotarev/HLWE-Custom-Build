@@ -488,7 +488,7 @@ void ScorePanel::SortPlayers( int iTeam, char *team )
 //-----------------------------------------------------------------------------
 void ScorePanel::RebuildTeams()
 {
-	int i, j;
+	int i = 0, j = 0;
 
 	// clear out player counts from teams
 	for ( i = 1; i <= m_iNumTeams; i++ )

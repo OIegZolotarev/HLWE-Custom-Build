@@ -1445,10 +1445,22 @@ float Impact(char chTextureType, vec3_t origin, vec3_t dir, int iBulletType, int
 //=========//
 void EV_DecalTrace(pmtrace_t *pTrace, int index)
 {
+	// CrazyRussian: was here
 	if (CVAR_GET_FLOAT("r_decals") > 0 && index > 0)
 	{
-		if (gEngfuncs.GetEntityByIndex(gEngfuncs.pEventAPI->EV_IndexFromTrace(pTrace))->model->type == mod_brush)
-		gEngfuncs.pEfxAPI->R_DecalShoot(gEngfuncs.pEfxAPI->Draw_DecalIndex(index), gEngfuncs.pEventAPI->EV_IndexFromTrace( pTrace ), 0, pTrace->endpos, 0);
+		int entIndex = gEngfuncs.pEventAPI->EV_IndexFromTrace(pTrace);
+		auto entity = gEngfuncs.GetEntityByIndex(entIndex);
+
+		if (!entity)
+			return;
+
+		if (!entity->model)
+			return;
+
+		if (entity->model->type == mod_brush)
+		{
+			gEngfuncs.pEfxAPI->R_DecalShoot(gEngfuncs.pEfxAPI->Draw_DecalIndex(index), gEngfuncs.pEventAPI->EV_IndexFromTrace(pTrace), 0, pTrace->endpos, 0);
+		}
 	}
 }
 
