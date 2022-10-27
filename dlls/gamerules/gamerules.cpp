@@ -105,7 +105,7 @@ CGameRules *InstallGameRules( void )
 	}
 	else
 	{
-		if ( !(strnicmp(STRING(gpGlobals->mapname), "cs_", 3) && strnicmp(STRING(gpGlobals->mapname), "de_", 3) && strnicmp(STRING(gpGlobals->mapname), "as_", 3) && strnicmp(STRING(gpGlobals->mapname), "es_", 3) ) )
+		if ( !(_strnicmp(STRING(gpGlobals->mapname), "cs_", 3) && _strnicmp(STRING(gpGlobals->mapname), "de_", 3) && _strnicmp(STRING(gpGlobals->mapname), "as_", 3) && _strnicmp(STRING(gpGlobals->mapname), "es_", 3) ) )
 		{
 			//count all cs game rules as teamplay, except fy_
 
@@ -114,21 +114,21 @@ CGameRules *InstallGameRules( void )
 			return new CHalfLifeMultiplay;
 			//return new CHalfLifeTeamplay;
 		}
-		else if ( !strnicmp(STRING(gpGlobals->mapname), "ctf_", 4) )
+		else if ( !_strnicmp(STRING(gpGlobals->mapname), "ctf_", 4) )
 		{
 			//capture the flag or something...
 
 			g_teamplay = 1;
 			return new CHLWECTF;
 		}
-		else if ( !strnicmp(STRING(gpGlobals->mapname), "lms_", 4) )
+		else if ( !_strnicmp(STRING(gpGlobals->mapname), "lms_", 4) )
 		{
 			//last man standing
 
 			g_teamplay = 0;
 			return new CHLWELMS;
 		}
-		else if ( !strnicmp(STRING(gpGlobals->mapname), "tr_", 3) )
+		else if ( !_strnicmp(STRING(gpGlobals->mapname), "tr_", 3) )
 		{
 			//Training map...
 			g_teamplay = 0;

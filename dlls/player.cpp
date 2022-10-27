@@ -2431,9 +2431,11 @@ edict_t *EntSelectSpawnPoint( CBaseEntity *pPlayer )
 {
 	if (!pPlayer->IsPlayer()) return INDEXENT(0);
 
-	CBaseEntity *pSpot;
-	edict_t		*player;
-	char		spotName[22] = " ";
+	CBaseEntity *pSpot = nullptr;
+	edict_t		*player = nullptr;
+	
+	// CrazyRussian: it was declared as 22 symbols, allowing for memory corruption *sigh*
+	char		spotName[32] = " ";
 	CBasePlayer *pplayer = (CBasePlayer *)pPlayer;
 
 	if (g_pGameRules->IsTeamplay())
@@ -3418,7 +3420,76 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 		return;
 
 		if (m_flMoneyAmount < MAX_MONEY)
-		GiveNamedItem("item_moneycase");
+			GiveNamedItem("item_moneycase");
+
+		// CrazyRussian
+
+		char* randomItems[] = { "weapon_medkit",
+	"weapon_crowbar",
+	"weapon_bandsaw",
+	"weapon_torch",
+	"weapon_lightsaber",
+	"weapon_glock",
+	"weapon_usp",
+	"weapon_deagle",
+	"weapon_python",
+	"weapon_uzi",
+	"weapon_shieldgun",
+	"weapon_shotgun",
+	"weapon_autoshotgun",
+	"weapon_30mmsg",
+	"weapon_mp5",
+	"weapon_m16",
+	"weapon_akimbogun",
+	"weapon_ak74",
+	"weapon_g11",
+	"weapon_u2",
+	"weapon_crossbow",
+	"weapon_svd",
+	"weapon_awp",
+	"weapon_barett",
+	"weapon_m249",
+	"weapon_minigun",
+	"weapon_nailgun",
+	"weapon_froster",
+	"weapon_flamethrower",
+	"weapon_machinegun",
+	"weapon_flakcannon",
+	"weapon_bfg",
+	"weapon_rpg",
+	"weapon_incendiary",
+	"weapon_whl",
+	"weapon_devastator",
+	"weapon_redeemer",
+	"weapon_smartgun",
+	"weapon_teslagun",
+	"weapon_egon",
+	"weapon_plasmarifle",
+	"weapon_photongun",
+	"weapon_gauss",
+	"weapon_taucannon",
+	"weapon_gluongun",
+	"weapon_displacer",
+	"weapon_flashbang",
+	"weapon_handgrenade",
+	"weapon_tripmine",
+	"weapon_satchel",
+	"weapon_c4",
+	"weapon_blaster",
+	"weapon_biorifle",
+	"weapon_pulserifle",
+	"weapon_m72",
+	"weapon_satellite",
+	"weapon_turretkit",
+	"weapon_chronosceptor"
+		};
+		
+		size_t nItems = ARRAYSIZE(randomItems);
+
+		for(size_t i = 0 ; i < nItems; i++)
+			GiveNamedItem(randomItems[i]);
+
+		// CrazyRussian
 
 		break;
 	}
@@ -3693,7 +3764,7 @@ int CBasePlayer::GetAmmoIndex(const char *psz)
 		if ( !CBasePlayerItem::AmmoInfoArray[i].pszName )
 			continue;
 
-		if (stricmp( psz, CBasePlayerItem::AmmoInfoArray[i].pszName ) == 0)
+		if (_stricmp( psz, CBasePlayerItem::AmmoInfoArray[i].pszName ) == 0)
 			return i;
 	}
 

@@ -267,7 +267,7 @@ void Host_Say( edict_t *pEntity, int teamonly )
 	if ( player->m_flNextChatTime > gpGlobals->time )
 		 return;
 
-	if ( !stricmp( pcmd, cpSay) || !stricmp( pcmd, cpSayTeam ) )
+	if ( !_stricmp( pcmd, cpSay) || !_stricmp( pcmd, cpSayTeam ) )
 	{
 		if ( CMD_ARGC() >= 2 )
 		{
@@ -793,6 +793,8 @@ void StartFrame( void )
    static float previous_time = 0.0;
    char msg[120];
 
+   //OutputDebugString("BotThink()\n");
+
    // loop through all the players...
    for ( i = 1; i <= gpGlobals->maxClients; i++ )
    {
@@ -835,6 +837,8 @@ void StartFrame( void )
       }
    }
 
+   //OutputDebugString("BotRespawn()\n");
+
    // is new game started and time to respawn bots yet?
    if ((!g_fGameOver) && (respawn_time > 1.0) &&
        (gpGlobals->time >= respawn_time))
@@ -867,6 +871,7 @@ void StartFrame( void )
    }
    // END BOT
 
+   //OutputDebugString("g_pGameRules->Think()\n");
 	if ( g_pGameRules )
 		g_pGameRules->Think();
 

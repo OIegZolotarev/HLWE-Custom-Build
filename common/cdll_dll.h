@@ -5,7 +5,7 @@
 
 #define MAX_WEAPON_SLOTS	9	// hud item selection slots
 #define MAX_ITEM_TYPES		9	// hud item selection slots
-#define MAX_ITEMS		12	// hard coded item types
+#define MAX_ITEMS		256	// hard coded item types
 
 #define	HIDEHUD_WEAPONS		( 1<<0 )
 #define	HIDEHUD_ALL		( 1<<1 )

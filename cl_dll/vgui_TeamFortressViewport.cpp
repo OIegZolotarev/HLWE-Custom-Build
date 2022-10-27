@@ -1562,7 +1562,7 @@ void TeamFortressViewport::SetCurrentMenu( CMenuPanel *pMenu )
 CMenuPanel* TeamFortressViewport::CreateTextWindow( int iTextToShow )
 {
 	char sz[256];
-	char *cText;
+	char *cText = nullptr;
 	char *pfile = NULL;
 	static const int MAX_TITLE_LENGTH = 32;
 	char cTitle[MAX_TITLE_LENGTH];
@@ -2479,7 +2479,7 @@ int TeamFortressViewport::MsgFunc_TeamScore( const char *pszName, int iSize, voi
 
 	for (j = 1; j <= MAX_TEAMS; j++ )
 	{
-		if ( !stricmp( TeamName, g_ExtraTeamInfo[j].name ) )
+		if ( !_stricmp( TeamName, g_ExtraTeamInfo[j].name ) )
 		{
 			found = true;
 			break;
@@ -2505,7 +2505,7 @@ int TeamFortressViewport::MsgFunc_TeamScore( const char *pszName, int iSize, voi
 	// find the team matching the name
 	for ( i = 1; i <= m_pScoreBoard->m_iNumTeams; i++ )
 	{
-		if ( !stricmp( TeamName, g_TeamInfo[i].name ) )
+		if ( !_stricmp( TeamName, g_TeamInfo[i].name ) )
 			break;
 	}
 

@@ -106,7 +106,7 @@ void AddAmmoNameToAmmoRegistry( const char *szAmmoname )
 		if ( !CBasePlayerItem::AmmoInfoArray[i].pszName)
 			continue;
 
-		if ( stricmp( CBasePlayerItem::AmmoInfoArray[i].pszName, szAmmoname ) == 0 )
+		if ( _stricmp( CBasePlayerItem::AmmoInfoArray[i].pszName, szAmmoname ) == 0 )
 			return; // ammo already in registry, just quite
 	}
 
@@ -679,6 +679,10 @@ void CBasePlayerWeapon::CompleteReload( void )
 
 void CBasePlayerWeapon::ItemPostFrame( void )
 {
+	char tmp[128];
+	sprintf(tmp, "%s\n", STRING(pev->classname));
+	OutputDebugString(tmp);
+
 	RestoreBody();
 
 	if ( ShouldWeaponIdle() )
@@ -1370,7 +1374,9 @@ void CLaserSpot::Revive( void )
 //=========================================================
 int CBasePlayerWeapon::ExtractAmmo( CBasePlayerWeapon *pWeapon )
 {
-	int iReturn;
+	// CrazyRussian: added initialization
+	// Run-Time Check Failure #3 - The variable 'iReturn' is being used without being initialized.
+	int iReturn = 0;
 
 	if ( pszAmmo1() != NULL )
 	{
@@ -1691,7 +1697,7 @@ int CWeaponBox::GiveAmmo( int iCount, char *szName, int iMax, int *pIndex/* = NU
 
 	for (i = 1; i < MAX_AMMO_SLOTS && !FStringNull( m_rgiszAmmo[i] ); i++)
 	{
-		if (stricmp( szName, STRING( m_rgiszAmmo[i])) == 0)
+		if (_stricmp( szName, STRING( m_rgiszAmmo[i])) == 0)
 		{
 			if (pIndex)
 				*pIndex = i;

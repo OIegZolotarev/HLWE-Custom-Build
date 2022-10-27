@@ -1370,7 +1370,7 @@ int SENTENCEG_Lookup(const char *sample, char *sentencenum)
 	// this is a sentence name; lookup sentence number
 	// and give to engine as string.
 	for (i = 0; i < gcallsentences; i++)
-		if (!stricmp(gszallsentencenames[i], sample+1))
+		if (!_stricmp(gszallsentencenames[i], sample+1))
 		{
 			if (sentencenum)
 			{
@@ -1486,7 +1486,7 @@ char TEXTURETYPE_Trace(TraceResult *ptr,  Vector vecSrc, Vector vecEnd)
 		else
 			pTextureName = TRACE_TEXTURE(ENT(0), rgfl1, rgfl2);
 
-		if (pTextureName && stricmp(pTextureName, "sky"))// XDM: HACK to avoid playing 'concrete' sounds when missing
+		if (pTextureName && _stricmp(pTextureName, "sky"))// XDM: HACK to avoid playing 'concrete' sounds when missing
 		{
 
 //			ALERT(at_console, "TRACE_TEXTURE returned %s\n", pTextureName);
@@ -1618,7 +1618,7 @@ void CSpeaker :: Precache( void )
 }
 void CSpeaker :: SpeakerThink( void )
 {
-	char* szSoundFile;
+	char* szSoundFile = nullptr;
 	float flvolume = pev->health * 0.1;
 	float flattenuation = 0.3;
 	int flags = 0;

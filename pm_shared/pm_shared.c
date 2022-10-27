@@ -132,7 +132,7 @@ void PM_SortTextures( void )
 	{
 		for ( j = i + 1; j < gcTextures; j++ )
 		{
-			if ( stricmp( grgszTextureName[ i ], grgszTextureName[ j ] ) > 0 )
+			if ( _stricmp( grgszTextureName[ i ], grgszTextureName[ j ] ) > 0 )
 			{
 				// Swap
 				//
@@ -226,7 +226,7 @@ char PM_FindTextureType( char *name )
 	{
 		pivot = ( left + right ) / 2;
 
-		val = strnicmp( name, grgszTextureName[ pivot ], CBTEXTURENAMEMAX-1 );
+		val = _strnicmp( name, grgszTextureName[ pivot ], CBTEXTURENAMEMAX-1 );
 		if ( val == 0 )
 		{
 			return grgchTextureType[ pivot ];

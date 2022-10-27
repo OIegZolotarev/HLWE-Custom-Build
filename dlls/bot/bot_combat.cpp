@@ -192,6 +192,10 @@ CBaseEntity * CBot::BotFindEnemy( void )
    Vector vecEnd;
    static BOOL flag=TRUE;
 
+   // TODO: use EHANDLE
+   if ((int)pBotEnemy == 0xDDDDDDDD)
+       pBotEnemy = nullptr;
+
    if (pBotEnemy != NULL)  // does the bot already have an enemy?
    {
       vecEnd = pBotEnemy->EyePosition();
@@ -437,10 +441,10 @@ void CBot::BotWeaponInventory( void )
       {
          primary_ammo[WEAPON_CROSSBOW] = m_rgAmmo[i];
       }
-      else if (stricmp("buckshot", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
+      else if (_stricmp("buckshot", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
          primary_ammo[WEAPON_SHOTGUN] = m_rgAmmo[i];
 
-      else if (stricmp("rockets", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
+      else if (_stricmp("rockets", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
          primary_ammo[WEAPON_RPG] = m_rgAmmo[i];
 
       else if (strcmp("uranium238", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
@@ -449,13 +453,13 @@ void CBot::BotWeaponInventory( void )
       else if (strcmp("uranium", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
          primary_ammo[WEAPON_GAUSS] = m_rgAmmo[i];
 
-      else if (stricmp("Hand Grenade", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
+      else if (_stricmp("Hand Grenade", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
          primary_ammo[WEAPON_HANDGRENADE] = m_rgAmmo[i];
 
-      else if (stricmp("Trip Mine", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
+      else if (_stricmp("Trip Mine", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
          primary_ammo[WEAPON_TRIPMINE] = m_rgAmmo[i];
 
-      else if (stricmp("Satchel Charge", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
+      else if (_stricmp("Satchel Charge", CBasePlayerItem::AmmoInfoArray[i].pszName) == 0)
          primary_ammo[WEAPON_SATCHEL] = m_rgAmmo[i];
 
    }

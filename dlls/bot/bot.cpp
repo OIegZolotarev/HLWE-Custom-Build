@@ -12,6 +12,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <assert.h>
 
 extern DLL_GLOBAL ULONG g_ulModelIndexPlayer;
 
@@ -1732,12 +1733,16 @@ void CBot::BotThink( void )
       pev->health = 0;
       pev->deadflag = DEAD_DEAD;  // make the kicked bot be dead
 
+      assert(respawn_index >= 0 && respawn_index < 32);
+
       bot_respawn[respawn_index].is_used = FALSE;  // this slot is now free
       bot_respawn[respawn_index].state = BOT_IDLE;
       respawn_index = -1;  // indicate no slot used
 
       // fall through to next if statement (respawn_index will be -1)
    }
+   
+   
 
    // is the round over (time/frag limit) or has the bot been removed?
    if ((g_fGameOver) || (respawn_index == -1))
@@ -1754,6 +1759,7 @@ void CBot::BotThink( void )
       return;
    }
 
+   
    pev->button = 0;  // make sure no buttons are pressed
 
    // see if it's time to check for sv_maxspeed change...
@@ -1774,6 +1780,7 @@ void CBot::BotThink( void )
 
    f_move_speed = f_max_speed;  // set to max speed unless known otherwise
 
+   
    // turn towards ideal_yaw by yaw_speed degrees
    degrees_turned = BotChangeYaw( pev->yaw_speed );
 
@@ -1783,8 +1790,10 @@ void CBot::BotThink( void )
       f_move_speed = 0;
    }
 
+
    else if (IsOnLadder( ))  // check if the bot is on a ladder...
    {
+       
       f_use_ladder_time = gpGlobals->time;
 
       BotOnLadder( moved_distance );  // go handle the ladder movement
@@ -1792,6 +1801,8 @@ void CBot::BotThink( void )
 
    else  // else handle movement related actions...
    {
+       
+
       // bot is not on a ladder so clear ladder direction flag...
       ladder_dir = 0;
 
@@ -1802,6 +1813,8 @@ void CBot::BotThink( void )
 
       if (pBotEnemy != NULL)  // does an enemy exist?
       {
+          
+
          BotShootAtEnemy( );  // shoot at the enemy
       }
 
@@ -1835,6 +1848,8 @@ void CBot::BotThink( void )
          // check if bot should look for items now or not...
          if (f_find_item < gpGlobals->time)
          {
+             
+
             BotFindItem( );  // see if there are any visible items
          }
 
@@ -1921,6 +1936,7 @@ void CBot::BotThink( void )
          {
             f_move_speed = 0;  // don't move while using elevator
 
+            
             BotUseLift( moved_distance );
          }
 
@@ -1930,9 +1946,11 @@ void CBot::BotThink( void )
 
             if (pev->waterlevel == 3)  // check if the bot is underwater...
             {
+                
                BotUnderWater( );
             }
 
+            
             // check if there is a wall on the left...
             if (!BotCheckWallOnLeft())
             {
@@ -1958,6 +1976,7 @@ void CBot::BotThink( void )
                f_wall_on_left = 0;  // reset wall detect time
             }
 
+            
             // check if there is a wall on the right...
             if (!BotCheckWallOnRight())
             {
@@ -1982,7 +2001,7 @@ void CBot::BotThink( void )
 
                f_wall_on_right = 0;  // reset wall detect time
             }
-
+            
             // check if bot is about to hit a wall.  TraceResult gets returned
             if ((f_dont_avoid_wall_time <= gpGlobals->time) &&
                 BotCantMoveForward( &tr ))
@@ -1990,7 +2009,7 @@ void CBot::BotThink( void )
                // ADD LATER
                // need to check if bot can jump up or duck under here...
                // ADD LATER
-
+                
                BotTurnAtWall( &tr );
             }
 
@@ -2051,7 +2070,7 @@ void CBot::BotThink( void )
       bot_was_paused = TRUE;
    else
       bot_was_paused = FALSE;
-
+   
    // TheFatal START - from www.telefragged.com/thefatal/jumblow.shtml
 
    g_engfuncs.pfnRunPlayerMove( edict( ), pev->v_angle, f_move_speed,

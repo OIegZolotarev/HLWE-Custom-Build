@@ -44,7 +44,8 @@ public:
 		return true;
 	}
 };
-static CMultiplayGameMgrHelper g_GameMgrHelper;
+
+//static CMultiplayGameMgrHelper g_GameMgrHelper;
 
 //*********************************************************
 // Rules for the half-life multiplayer game.
@@ -1456,7 +1457,7 @@ void CHalfLifeMultiplay :: InterpretBuyCommand ( const char* pcmd, CBasePlayer* 
 
 CHalfLifeMultiplay :: CHalfLifeMultiplay()
 {
-	g_VoiceGameMgr.Init(&g_GameMgrHelper, gpGlobals->maxClients);
+	//g_VoiceGameMgr.Init(&g_GameMgrHelper, gpGlobals->maxClients);
 	m_flIntermissionEndTime = 0;
 	g_flIntermissionStartTime = 0;
 	
@@ -1875,11 +1876,13 @@ void CHalfLifeMultiplay :: PlayerSpawn( CBasePlayer *pPlayer )
 
 	if (addDefault)
 	{
-		pPlayer->GiveNamedItem("weapon_flashbang");
-		pPlayer->GiveNamedItem("weapon_crowbar");
-		pPlayer->GiveNamedItem("weapon_glock");
 
 		// CrazyRussian: debug
+
+
+		//pPlayer->GiveNamedItem("weapon_flashbang");
+		//pPlayer->GiveNamedItem("weapon_crowbar");
+		//pPlayer->GiveNamedItem("weapon_glock");
 
 		char* randomItems[] = {"weapon_medkit",
 			"weapon_crowbar",
@@ -1943,7 +1946,8 @@ void CHalfLifeMultiplay :: PlayerSpawn( CBasePlayer *pPlayer )
 
 		size_t nItems = ARRAYSIZE(randomItems);
 
-		pPlayer->GiveNamedItem(randomItems[RANDOM_LONG(0,nItems)]);
+		//pPlayer->GiveNamedItem(randomItems[RANDOM_LONG(0,nItems)]);
+		pPlayer->GiveNamedItem("weapon_devastator");
 		//pPlayer->Buy
 		// CrazyRussian
 
@@ -2905,7 +2909,7 @@ void CHalfLifeMultiplay :: ChangeLevel( void )
 	curplayers = CountPlayers();
 
 	// Has the map cycle filename changed?
-	if ( stricmp( mapcfile, szPreviousMapCycleFile ) )
+	if ( _stricmp( mapcfile, szPreviousMapCycleFile ) )
 	{
 		strcpy( szPreviousMapCycleFile, mapcfile );
 
