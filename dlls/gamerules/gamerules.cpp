@@ -108,11 +108,9 @@ CGameRules *InstallGameRules( void )
 		if ( !(_strnicmp(STRING(gpGlobals->mapname), "cs_", 3) && _strnicmp(STRING(gpGlobals->mapname), "de_", 3) && _strnicmp(STRING(gpGlobals->mapname), "as_", 3) && _strnicmp(STRING(gpGlobals->mapname), "es_", 3) ) )
 		{
 			//count all cs game rules as teamplay, except fy_
-
 			g_teamplay = 1;
-			// CrazyRussian: debug
-			return new CHalfLifeMultiplay;
-			//return new CHalfLifeTeamplay;
+
+			return new CHalfLifeTeamplay;
 		}
 		else if ( !_strnicmp(STRING(gpGlobals->mapname), "ctf_", 4) )
 		{

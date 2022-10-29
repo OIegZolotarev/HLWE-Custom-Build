@@ -212,7 +212,8 @@ private:
 
 	menu_state	state;
 	int			availableItems;//hacking var
-	char		moneyValue[96];
+	// CrazyRussian: increase size for safety - i got money string-related issues in my mode once upon a time...
+	char		moneyValue[256];
 	byte		moneyStringLength;//fast
 };
 

@@ -1787,6 +1787,7 @@ void CBuyMenu::SetAppearance ( const char* arg )
 
 void CBuyMenu::SetMoneyAmount ( int money )
 {
-	sprintf ( moneyValue, "Half-Life : Weapon Edition 1.5.0.7. You have %i rub. 0 kop.", money );
+	// CrazyRussian: changed version number
+	sprintf ( moneyValue, "Half-Life : Weapon Edition 1.5.0.8-CB. You have %i rub. 0 kop.", money );
 	moneyStringLength = strlen (moneyValue);
 }
