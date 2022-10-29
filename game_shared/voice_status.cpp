@@ -804,15 +804,16 @@ void CVoiceStatus::FreeBitmaps()
 	m_pScoreboardBanned = NULL;
 
 	// Clear references to the images in panels.
-	for(int i=0; i < VOICE_MAX_PLAYERS; i++)
-	{
-		// TODO: crashes here
-
-		if (m_pBanButtons[i])
-		{
-			m_pBanButtons[i]->setImage(NULL);
-		}
-	}
+	// CrazyRussian: freed by engine?
+// 	for(int i=0; i < VOICE_MAX_PLAYERS; i++)
+// 	{
+// 		// TODO: crashes here
+// 
+// 		if (m_pBanButtons[i])
+// 		{
+// 			m_pBanButtons[i]->setImage(NULL);
+// 		}
+// 	}
 
 	if(m_pLocalLabel)
 		m_pLocalLabel->setImage(NULL);

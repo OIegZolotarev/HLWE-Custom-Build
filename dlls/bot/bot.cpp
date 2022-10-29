@@ -1723,17 +1723,6 @@ BOOL CBot::BotCheckWallOnRight( void )
 
 void CBot::BotThink( void )
 {
-
-	// TheFatal START - from www.telefragged.com/thefatal/jumblow.shtml
-
-	g_engfuncs.pfnRunPlayerMove(edict(), pev->v_angle, f_move_speed,
-		0, 0, pev->button, 0,
-		gpGlobals->frametime * 1000);
-	// TheFatal - END
-
-	return;
-
-
    Vector v_diff;             // vector from previous to current location
    float moved_distance;      // length of v_diff vector (distance bot moved)
    float degrees_turned;
