@@ -251,6 +251,10 @@ void CopyToBodyQue(entvars_t *pev, BOOL Ignite)
 	if (pev->effects & EF_NODRAW)
 		return;
 
+	// CrazyRussian: crash here?
+	if (!g_pBodyQueueHead)
+		return;
+
 	entvars_t *pevHead	= VARS(g_pBodyQueueHead);
 	pevHead->body		= pev->body;
 	pevHead->angles		= pev->angles;
