@@ -681,7 +681,7 @@ void CBasePlayerWeapon::ItemPostFrame( void )
 {
 	char tmp[128];
 	sprintf(tmp, "%s\n", STRING(pev->classname));
-	OutputDebugString(tmp);
+	//OutputDebugString(tmp);
 
 	RestoreBody();
 

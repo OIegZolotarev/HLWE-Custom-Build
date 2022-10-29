@@ -1723,6 +1723,17 @@ BOOL CBot::BotCheckWallOnRight( void )
 
 void CBot::BotThink( void )
 {
+
+	// TheFatal START - from www.telefragged.com/thefatal/jumblow.shtml
+
+	g_engfuncs.pfnRunPlayerMove(edict(), pev->v_angle, f_move_speed,
+		0, 0, pev->button, 0,
+		gpGlobals->frametime * 1000);
+	// TheFatal - END
+
+	return;
+
+
    Vector v_diff;             // vector from previous to current location
    float moved_distance;      // length of v_diff vector (distance bot moved)
    float degrees_turned;
@@ -1742,7 +1753,7 @@ void CBot::BotThink( void )
       // fall through to next if statement (respawn_index will be -1)
    }
    
-   
+
 
    // is the round over (time/frag limit) or has the bot been removed?
    if ((g_fGameOver) || (respawn_index == -1))
@@ -1784,6 +1795,10 @@ void CBot::BotThink( void )
    // turn towards ideal_yaw by yaw_speed degrees
    degrees_turned = BotChangeYaw( pev->yaw_speed );
 
+   // CrazyRussian: debug
+
+
+
    if (degrees_turned >= pev->yaw_speed)
    {
       // if bot is still turning, turn in place by setting speed to 0
@@ -1813,9 +1828,7 @@ void CBot::BotThink( void )
 
       if (pBotEnemy != NULL)  // does an enemy exist?
       {
-          
-
-         BotShootAtEnemy( );  // shoot at the enemy
+          BotShootAtEnemy();  // shoot at the enemy
       }
 
       else if (f_pause_time > gpGlobals->time)  // is bot "paused"?

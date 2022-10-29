@@ -137,7 +137,8 @@ bool CPSTrail::Update(const float &time, const double &elapsedTime)
 				curPart->UpdateSize(elapsedTime);
 		}
 		else
-			curPart->m_fEnergy = -1.0f;
+			// CrazyRussian: * elapsedTime was missing
+			curPart->m_fEnergy = -1.0f * elapsedTime;
 	}
 	return 0;
 }

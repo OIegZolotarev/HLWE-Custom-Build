@@ -12,6 +12,7 @@
 
 // START BOT
 #include "bot.h"
+#include <assert.h>
 extern respawn_t bot_respawn[32];
 // END BOT
 
@@ -1944,10 +1945,15 @@ void CHalfLifeMultiplay :: PlayerSpawn( CBasePlayer *pPlayer )
 			"weapon_chronosceptor"
 	};
 
-		size_t nItems = ARRAYSIZE(randomItems);
+		size_t nItems = ARRAYSIZE(randomItems) - 1;
+		size_t itemIndex = RANDOM_LONG(0, nItems);
+		
+		const char* itemName = randomItems[itemIndex];
 
-		//pPlayer->GiveNamedItem(randomItems[RANDOM_LONG(0,nItems)]);
-		pPlayer->GiveNamedItem("weapon_devastator");
+		assert(((unsigned int)itemName) != 0xCCCCCCCC);
+
+		pPlayer->GiveNamedItem(itemName);
+		//pPlayer->GiveNamedItem("weapon_devastator");
 		//pPlayer->Buy
 		// CrazyRussian
 
@@ -2125,7 +2131,9 @@ void CHalfLifeMultiplay::DeathNotice( CBasePlayer *pVictim, entvars_t *pKiller, 
 		{
 			pPlayer->KillsAmount ++;
 
-			char str[25];
+			// CrazyRussian: adjusted size to be sure
+			char str[32];
+
 			switch (pPlayer->KillsAmount)
 			{
 			case 1:
@@ -2153,7 +2161,9 @@ void CHalfLifeMultiplay::DeathNotice( CBasePlayer *pVictim, entvars_t *pKiller, 
 				EMIT_SOUND(pPlayer->edict(), CHAN_ITEM, "announce/kill_unstopable.wav", 1, ATTN_NORM);
 				pPlayer->AddMoney (GIVE_KILL_UNSTOPABLE);
 				pPlayer->GiveNamedItem("weapon_devastator");
-				if (pPlayer->m_fCloak = FALSE)
+				// CrazyRussian: fixed ==
+				//if (pPlayer->m_fCloak = FALSE)
+				if (pPlayer->m_fCloak == FALSE)
 					pPlayer->GiveNamedItem("item_cloak");
 				sprintf(str, "#UNSTOPABLE_KILL");
 				break;

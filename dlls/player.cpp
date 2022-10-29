@@ -14,6 +14,7 @@
 #include "hltv.h"
 #include "skill.h"
 #include "projectiles.h"
+#include <assert.h>
 
 extern DLL_GLOBAL ULONG	g_ulModelIndexPlayer;
 extern DLL_GLOBAL BOOL	g_fGameOver;
@@ -1021,6 +1022,8 @@ entvars_t *g_pevLastInflictor;  // Set in combat.cpp.  Used to pass the damage i
 
 void CBasePlayer::Killed( entvars_t *pevAttacker, int iGib )
 {
+	
+
 	CSound *pSound;
 
 	CBaseEntity *pKiller = CBaseEntity::Instance( pevAttacker );
@@ -1034,6 +1037,7 @@ void CBasePlayer::Killed( entvars_t *pevAttacker, int iGib )
 	m_pNextItem = NULL;
 
 	g_pGameRules->PlayerKilled( this, pevAttacker, g_pevLastInflictor );
+	
 
 	// buz: spec tank
 	if (m_pSpecTank)
@@ -1043,10 +1047,10 @@ void CBasePlayer::Killed( entvars_t *pevAttacker, int iGib )
 	}
 
 	if (m_fCloakActivated)
-	CloakToggle(FALSE);
+		CloakToggle(FALSE);
 
 	if (m_fAntigravActivated)
-	AntigravToggle(FALSE);
+		AntigravToggle(FALSE);
 
 	// this client isn't going to be thinking for a while, so reset the sound until they respawn
 	pSound = CSoundEnt::SoundPointerForIndex( CSoundEnt::ClientSoundIndex( edict() ) );
@@ -1109,17 +1113,18 @@ void CBasePlayer::Killed( entvars_t *pevAttacker, int iGib )
 	DeathSound();
 
 	if (m_fHeavyArmor)
-	g_engfuncs.pfnSetClientKeyValue(entindex(), g_engfuncs.pfnGetInfoKeyBuffer( edict() ), "model", oldmodel);
+		g_engfuncs.pfnSetClientKeyValue(entindex(), g_engfuncs.pfnGetInfoKeyBuffer( edict() ), "model", oldmodel);
 
 	pev->angles.x = 0;
 	pev->angles.z = 0;
 	pev->velocity = g_vecZero;
 	pev->avelocity = g_vecZero;
 
+	// CrazyRussian: debug
 	SetThink(&CBasePlayer::PlayerDeathThink);
 
 	if (FlashlightIsOn())
-	FlashlightTurnOff();
+		FlashlightTurnOff();
 
 	pev->nextthink = gpGlobals->time + 0.1;
 }
@@ -2530,6 +2535,9 @@ edict_t *EntSelectSpawnPoint( CBaseEntity *pPlayer )
 		{
 
 			CBaseEntity *ent = NULL;
+
+			assert(pSpot);
+
 			while ( (ent = UTIL_FindEntityInSphere( ent, pSpot->pev->origin, 72 )) != NULL )
 			{
 				// if ent is a client, kill em (unless they are ourselves)

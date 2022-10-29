@@ -1636,6 +1636,9 @@ void DLLEXPORT V_CalcRefdef( struct ref_params_s *pparams )
 		V_CalcNormalRefdef ( pparams );
 	}
 
+	// CrazyRussian: fixing particles billboards
+	VectorCopy(pparams->viewangles, g_vecViewAngles);
+
 /*
 // Example of how to overlay the whole screen with red at 50 % alpha
 #define SF_TEST

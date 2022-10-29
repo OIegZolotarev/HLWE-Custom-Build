@@ -90,7 +90,7 @@ void EV_BlastModel( float *origin, int body, float StartScale, float scaleADD, f
 	BlastModel = gEngfuncs.pEfxAPI->R_TempModel( origin, Vector(0,0,0), Vector(0,0,0), 20, gEngfuncs.pEventAPI->EV_FindModelIndex("models/explosions.mdl"), TE_BOUNCE_NULL );
 
 	if(!BlastModel)
-	return;
+		return;
 
 	BlastModel->entity.curstate.body = body;			
 	BlastModel->entity.curstate.scale = StartScale;
@@ -176,6 +176,10 @@ void EV_Wallgib( float *origin, float random, float scale, float life, int count
 		VectorScale(dir, random, velocity);
 
 		TEMPENTITY *WallGib = gEngfuncs.pEfxAPI->R_TempModel(origin, velocity, vec3_origin, life, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), 0);
+
+		if (!WallGib)
+			break;
+
 		WallGib->entity.curstate.skin = skin;			
 		WallGib->entity.curstate.scale = scale;
 		WallGib->flags |= (flags);
@@ -233,6 +237,10 @@ void EV_BreakableGib( float *origin, float random, float scale, float life, int 
 		VectorScale(dir, random, velocity);
 
 		TEMPENTITY *BreakGib = gEngfuncs.pEfxAPI->R_TempModel(origin, velocity, vec3_origin, life, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_worldgibs.mdl"), 0);
+
+		if (!BreakGib)
+			return;
+
 		BreakGib->entity.curstate.scale = scale;
 		BreakGib->entity.curstate.skin = skin;
 		BreakGib->flags |= (flags);
@@ -322,6 +330,10 @@ void EV_EjectBrass( float *origin, float rotation, int soundtype, int body, int 
 		ShellVelocity[i] = -forward[i] * fR + up[i] * fU + right[i] * gEngfuncs.pfnRandomFloat(50,80);
 
 	TEMPENTITY *shell = gEngfuncs.pEfxAPI->R_TempModel( origin, ShellVelocity, src, iLife, gEngfuncs.pEventAPI->EV_FindModelIndex ("models/w_shells_all.mdl"), soundtype );
+
+	if (!shell)
+		return;
+
 	shell->entity.curstate.body = body;			
 
 	if (gHUD.SmokingShells->value > 0)
@@ -361,6 +373,10 @@ void EV_BrassGunClip( float *origin, int body )
 	VectorClear(src);
 	src[1] = gEngfuncs.pfnRandomLong(-20,50);
 	TEMPENTITY *clip = gEngfuncs.pEfxAPI->R_TempModel( origin, ShellVelocity, src, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex ("models/w_clips_all.mdl"), TE_BOUNCE_NULL );
+
+	if (!clip)
+		return;
+
 	clip->entity.curstate.body = body;			
 
 	clip->entity.baseline.iuser1 = 15;
@@ -1810,6 +1826,11 @@ int __MsgFunc_ImpBullet(const char *pszName, int iSize, void *pbuf)
 				VectorMA(origin, -12, normal, src);
 				VectorAngles(normal, nail_angles);
 				TEMPENTITY *bolt = gEngfuncs.pEfxAPI->R_TempModel( src, Vector(0,0,0), nail_angles, 15, gEngfuncs.pEventAPI->EV_FindModelIndex("models/projectiles.mdl"), TE_BOUNCE_NULL );
+
+				// CrazyRussian
+				if (!bolt)
+					break;
+
 				bolt->entity.curstate.body = 6;			
 				bolt->flags &= ~FTENT_GRAVITY;
 				if (iRand < (0x7fff/2))
@@ -4085,6 +4106,12 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(300, 400), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+			// CrazyRussian
+
 			pGibHead->entity.curstate.body = 36;
 			pGibHead->entity.baseline.sequence = 666;
 			pGibHead->entity.baseline.iuser2 = GIBBED_BODY;
@@ -4099,6 +4126,12 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(300, 400), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+			// CrazyRussian
+
 			pGibHead->entity.curstate.body = 37;
 			pGibHead->entity.baseline.sequence = 666;
 			pGibHead->entity.baseline.iuser2 = GIBBED_BODY;
@@ -4113,6 +4146,12 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(500, 700), vecScale);
 
 			pGib = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGib)
+				break;
+			// CrazyRussian
+
 			pGib->entity.curstate.body = gEngfuncs.pfnRandomLong(38, 49);
 			pGib->entity.baseline.sequence = 666;
 			pGib->entity.baseline.iuser2 = GIBBED_BODY;
@@ -4136,6 +4175,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(90, 120), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 50;
 			pGibHead->entity.baseline.sequence = 666;
 			pGibHead->entity.baseline.iuser2 = GIBBED_BODY;
@@ -4150,6 +4194,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(90, 120), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 51;
 			pGibHead->entity.baseline.sequence = 666;
 			pGibHead->entity.baseline.iuser2 = GIBBED_BODY;
@@ -4164,6 +4213,12 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(120, 180), vecScale);
 
 			pGib = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+
+			// CrazyRussian
+			if (!pGib)
+				break;
+
 			pGib->entity.curstate.body = gEngfuncs.pfnRandomLong(52, 56);
 			pGib->entity.curstate.scale = gEngfuncs.pfnRandomFloat(0.5, 1);
 			pGib->entity.baseline.sequence = 666;
@@ -4187,6 +4242,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(250, 350), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 36;
 			pGibHead->entity.curstate.rendercolor.r = 0;
 			pGibHead->entity.curstate.rendercolor.g = 90;
@@ -4204,6 +4264,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(250, 350), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 37;
 			pGibHead->entity.curstate.rendercolor.r = 0;
 			pGibHead->entity.curstate.rendercolor.g = 90;
@@ -4221,6 +4286,12 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(400, 600), vecScale);
 
 			pGib = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGib)
+				break;
+
+
 			pGib->entity.curstate.body = gEngfuncs.pfnRandomLong(38, 51);
 			pGib->entity.curstate.rendercolor.r = 0;
 			pGib->entity.curstate.rendercolor.g = 90;
@@ -4241,6 +4312,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(350, 550), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 57;
 			pGibHead->entity.baseline.sequence = 2;
 			pGibHead->entity.baseline.iuser2 = GIBBED_IGNITE;
@@ -4255,6 +4331,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(350, 550), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 58;
 			pGibHead->entity.baseline.sequence = 2;
 			pGibHead->entity.baseline.iuser2 = GIBBED_IGNITE;
@@ -4269,6 +4350,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(500, 850), vecScale);
 
 			pGib = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGib)
+				break;
+
 			pGib->entity.curstate.body = gEngfuncs.pfnRandomLong(59, 66);
 			pGib->entity.baseline.sequence = 2;
 			pGib->entity.baseline.iuser2 = GIBBED_IGNITE;
@@ -4287,6 +4373,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(200, 300), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 67;
 			pGibHead->entity.baseline.sequence = 2;
 			pGibHead->entity.baseline.iuser2 = GIBBED_IGNITE;
@@ -4301,6 +4392,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(200, 300), vecScale);
 
 			pGibHead = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGibHead)
+				break;
+
 			pGibHead->entity.curstate.body = 68;
 			pGibHead->entity.baseline.sequence = 2;
 			pGibHead->entity.baseline.iuser2 = GIBBED_IGNITE;
@@ -4315,6 +4411,11 @@ int __MsgFunc_PlrGib(const char *pszName, int iSize, void *pbuf)
 			VectorScale(dir, gEngfuncs.pfnRandomFloat(300, 380), vecScale);
 
 			pGib = gEngfuncs.pEfxAPI->R_TempModel (origin, vecScale, gib_angles, gHUD.GibsLifeCvar->value, gEngfuncs.pEventAPI->EV_FindModelIndex("models/w_gibs_all.mdl"), TE_BOUNCE_NULL);
+
+			// CrazyRussian
+			if (!pGib)
+				break;
+
 			pGib->entity.curstate.body = gEngfuncs.pfnRandomLong(69, 75);
 			pGib->entity.baseline.sequence = 2;
 			pGib->entity.baseline.iuser2 = GIBBED_IGNITE;

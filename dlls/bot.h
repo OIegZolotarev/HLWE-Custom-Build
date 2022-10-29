@@ -78,10 +78,10 @@ class CBot : public CBasePlayer //Derive a bot class from CBasePlayer
       float  f_wall_on_left;  // time since bot has had a wall on the left
       float  f_wall_on_right; // time since bot has had a wall on the right
 
-      CBaseEntity *pBotEnemy; // pointer to bot's enemy
-      CBaseEntity *pBotUser;  // pointer to player using bot
-      CBaseEntity *pBotPickupItem;  // pointer to item we are trying to get
-      CBasePlayerItem *weapon_ptr[MAX_WEAPONS];  // pointer array to weapons
+      EHANDLE pBotEnemy; // pointer to bot's enemy
+      EHANDLE pBotUser;  // pointer to player using bot
+      EHANDLE pBotPickupItem;  // pointer to item we are trying to get
+      EHANDLE weapon_ptr[MAX_WEAPONS];  // pointer array to weapons
       int primary_ammo[MAX_WEAPONS];  // amount of primary ammo available
       int secondary_ammo[MAX_WEAPONS];  // amount of secondary ammo available
 

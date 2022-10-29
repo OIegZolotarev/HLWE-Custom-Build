@@ -241,8 +241,10 @@ public:
 protected:
 	virtual void ChangeLevel( void );
 	virtual void GoToIntermission( void );
-	float m_flIntermissionEndTime;
-	BOOL m_iEndIntermissionButtonHit;
+
+	// CrazyRussian
+	float m_flIntermissionEndTime = 0;
+	BOOL m_iEndIntermissionButtonHit = 0;
 	void SendMOTDToClient( edict_t *client );
 };
 

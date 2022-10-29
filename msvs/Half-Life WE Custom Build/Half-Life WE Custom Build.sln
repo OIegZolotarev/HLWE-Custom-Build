@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cl_dll", "..\..\cl_dll\cl_d
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hl", "..\..\dlls\hl.vcxproj", "{C64CF738-18DB-4046-9B44-1BA3FE35FFBE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "engine", "..\..\..\H.L.A.M. DX Edition\Xash3D\xash_build4344_src\engine\engine.vcxproj", "{5D15BA82-A8C2-4DA6-844D-81DE5242045C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -31,6 +33,14 @@ Global
 		{C64CF738-18DB-4046-9B44-1BA3FE35FFBE}.Release|x86.Build.0 = Release|Win32
 		{C64CF738-18DB-4046-9B44-1BA3FE35FFBE}.Template|x86.ActiveCfg = Template|Win32
 		{C64CF738-18DB-4046-9B44-1BA3FE35FFBE}.Template|x86.Build.0 = Template|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Debug|x86.ActiveCfg = Debug|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Debug|x86.Build.0 = Debug|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Profile|x86.ActiveCfg = Debug|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Profile|x86.Build.0 = Debug|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Release|x86.ActiveCfg = Release|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Release|x86.Build.0 = Release|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Template|x86.ActiveCfg = Template|Win32
+		{5D15BA82-A8C2-4DA6-844D-81DE5242045C}.Template|x86.Build.0 = Template|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
